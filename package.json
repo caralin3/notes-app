@@ -9,10 +9,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev-web": "yarn workspace @notes-app/web run dev",
-    "build-web": "yarn workspace @notes-app/web run build",
-    "lint-web": "yarn workspace @notes-app/web run lint",
-    "preview-web": "yarn workspace @notes-app/web run preview",
-    "dev-mobile": "yarn workspace @notes-app/mobile run start"
+    "web:dev": "yarn workspace @notes-app/web run dev",
+    "web:build": "yarn workspace @notes-app/web run build",
+    "web:lint": "yarn workspace @notes-app/web run lint",
+    "web:preview": "yarn workspace @notes-app/web run preview",
+    "mobile:start": "yarn workspace @notes-app/mobile run start",
+    "electron:dev": "yarn workspace @notes-app/electron dev",
+    "electron:preview": "yarn workspace @notes-app/electron preview"
   }
 }
