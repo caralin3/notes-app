@@ -1,6 +1,7 @@
-import Versions from './components/Versions'
-import electronLogo from './assets/electron.svg'
 import { Button } from '@notes-app/component-library'
+
+import electronLogo from './assets/electron.svg'
+import Versions from './components/Versions'
 
 function App(): JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
