@@ -10,7 +10,8 @@
     "packages/*"
   ],
   "scripts": {
-    "web:dev": "yarn workspace @notes-app/web run dev",
+    "component-library:build": "yarn workspace @notes-app/component-library run build",
+    "web:dev": "yarn component-library:build && yarn workspace @notes-app/web run dev",
     "web:build": "yarn workspace @notes-app/web run build",
     "web:lint": "yarn workspace @notes-app/web run lint",
     "web:preview": "yarn workspace @notes-app/web run preview",

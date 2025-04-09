@@ -31,6 +31,12 @@ export default [
       postcss(),
       terser(),
     ],
+    onwarn(warning, warn) {
+      if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+        return; // Ignore the warning
+      }
+      warn(warning); // Pass other warnings
+    },
   },
   {
     input: "src/index.ts",

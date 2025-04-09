@@ -1,12 +1,14 @@
+import Button, { ButtonProps } from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
 import "./Button.css";
-import { ButtonProps } from "./Button.types";
+// import { ButtonProps } from "./Button.types";
 
-const Button = ({ type, text, onClick }: ButtonProps) => {
-  return (
-    <button type="button" className={`Button Button-${type}`} onClick={onClick}>
-      {text}
-    </button>
-  );
-};
+const StyledButton = styled(Button)<ButtonProps>(({ theme }) => ({
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.common.white,
+  // return (
+  //   <Button sx={{ backgroundColor: theme.palette.primary.main }}>Test</Button>
+  // );
+}));
 
-export default Button;
+export default StyledButton;
