@@ -6,7 +6,7 @@
   "main": "index.js",
   "license": "MIT",
   "workspaces": [
-    "packages/*"
+    "apps/*"
   ],
   "scripts": {
     "web:dev": "yarn workspace @notes-app/web run dev",
