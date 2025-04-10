@@ -1,4 +1,4 @@
-import { Button } from '@notes-app/component-library'
+import { Button } from '@notes-app/ui-library'
 
 import electronLogo from './assets/electron.svg'
 import Versions from './components/Versions'
@@ -8,7 +8,7 @@ function App(): JSX.Element {
 
   return (
     <>
-      <Button type="primary" text="Primary" onClick={() => {}} />
+      <Button onClick={() => {}}>Test</Button>
       <img alt="logo" className="logo" src={electronLogo} />
       <div className="creator">Powered by electron-vite</div>
       <div className="text">
