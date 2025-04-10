@@ -12,6 +12,7 @@
     "dist"
   ],
   "scripts": {
+    "watch": "rollup -c --watch --bundleConfigAsCjs",
     "build": "rollup -c --bundleConfigAsCjs"
   },
   "devDependencies": {
