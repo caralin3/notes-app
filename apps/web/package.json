@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "pretty": "yarn run prettier --write ./src"
+    "pretty": "prettier --write ./src"
   },
   "dependencies": {
     "@notes-app/ui-library": "1.0.0",

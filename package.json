@@ -12,6 +12,7 @@
   "scripts": {
     "ui-library:watch": "yarn workspace @notes-app/ui-library run watch",
     "ui-library:build": "yarn workspace @notes-app/ui-library run build",
+    "ui-library:lint": "yarn workspace @notes-app/ui-library run lint",
     "ui-library:pretty": "yarn workspace @notes-app/ui-library run pretty",
     "web:dev": "yarn workspace @notes-app/web run dev",
     "web:build": "yarn workspace @notes-app/web run build",
