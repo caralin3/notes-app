@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Box, Typography } from '@notes-app/ui-library';
+import { Box, Tiptap, Typography } from '@notes-app/ui-library';
 
 import reactLogo from './assets/react.svg';
 
@@ -21,6 +21,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </Box>
+      <Tiptap />
       <Typography variant="h1">Vite + React</Typography>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
