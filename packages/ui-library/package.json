@@ -14,6 +14,8 @@
   "scripts": {
     "watch": "rollup -c --watch --bundleConfigAsCjs",
     "build": "rollup -c --bundleConfigAsCjs",
+    "ladle:serve": "ladle serve",
+    "ladle:build": "ladle build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "pretty": "prettier --write ./src"
@@ -22,6 +24,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@eslint/js": "^9.24.0",
+    "@ladle/react": "^5.0.2",
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "@rollup/plugin-commonjs": "^28.0.3",
