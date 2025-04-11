@@ -1,4 +1,4 @@
-import { Button } from '@notes-app/ui-library'
+import { Typography } from '@notes-app/ui-library'
 
 import electronLogo from './assets/electron.svg'
 import Versions from './components/Versions'
@@ -8,9 +8,8 @@ function App(): JSX.Element {
 
   return (
     <>
-      <Button onClick={() => {}}>Test</Button>
       <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
+      <Typography className="creator">Powered by electron-vite</Typography>
       <div className="text">
         Build an Electron app with <span className="react">React</span>
         &nbsp;and <span className="ts">TypeScript</span>

@@ -1,1 +1,3 @@
-export { default as Button } from './Button';
+export { Box, Stack, Typography } from '@mui/material';
+
+export { Button } from './Button';

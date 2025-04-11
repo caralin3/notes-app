@@ -1,14 +1,7 @@
-import Button, { ButtonProps } from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-import './Button.css';
-// import { ButtonProps } from "./Button.types";
+import MuiButton, { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 
-const StyledButton = styled(Button)<ButtonProps>(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  color: theme.palette.common.white,
-  // return (
-  //   <Button sx={{ backgroundColor: theme.palette.primary.main }}>Test</Button>
-  // );
-}));
+import { ButtonProps } from './Button.types';
 
-export default StyledButton;
+export const Button = ({ label, ...props }: MuiButtonProps & ButtonProps) => {
+  return <MuiButton {...props}>{label}</MuiButton>;
+};

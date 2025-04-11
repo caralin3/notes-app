@@ -5,5 +5,6 @@ export default {
       enabled: true,
     },
   },
+  expandStoryTree: true,
   outDir: 'dist/ladle',
 };
