@@ -13,8 +13,10 @@
   },
   "dependencies": {
     "@notes-app/ui-library": "1.0.0",
+    "@toolpad/core": "^0.13.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router": "^7.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
