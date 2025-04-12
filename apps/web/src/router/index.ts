@@ -1,3 +1,4 @@
+import { AllNotesPage } from '@notes-app/ui-library';
 import { createBrowserRouter } from 'react-router';
 
 import App from '../App';
@@ -7,20 +8,46 @@ export { NAVIGATION } from './navigation.tsx';
 
 export const router = createBrowserRouter([
   {
-    Component: App,
+    Component: App, // root layout route
     children: [
       {
         path: '/',
         Component: Layout,
-      },
-      {
-        path: '/sign-in',
-        Component: Layout,
-      },
-      {
-        path: '/orders',
-        Component: Layout,
+        children: [
+          {
+            path: '',
+            Component: AllNotesPage,
+          },
+          {
+            path: 'orders',
+            // Component: OrdersPage,
+          },
+          {
+            path: '/sign-in',
+            // Component: Layout,
+          },
+        ],
       },
     ],
   },
 ]);
+
+// export const router = createBrowserRouter([
+//   {
+//     Component: App,
+//     children: [
+//       {
+//         path: '/',
+//         Component: Layout,
+//       },
+//       {
+//         path: '/sign-in',
+//         Component: Layout,
+//       },
+//       {
+//         path: '/orders',
+//         Component: Layout,
+//       },
+//     ],
+//   },
+// ]);

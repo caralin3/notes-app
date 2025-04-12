@@ -1,7 +1,11 @@
-import type { Story } from '@ladle/react';
+import type { Story, StoryDefault } from '@ladle/react';
 import { Stack } from '@mui/material';
 
 import { Button } from './Button';
+
+export default {
+  title: 'Components / Button',
+} satisfies StoryDefault;
 
 interface VariantsStoryProps {
   disabled: boolean;

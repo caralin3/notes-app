@@ -1,6 +1,10 @@
-import { Story } from '@ladle/react';
+import { Story, StoryDefault } from '@ladle/react';
 
 import { Tiptap } from './Tiptap';
+
+export default {
+  title: 'Components / Tiptap',
+} satisfies StoryDefault;
 
 export const Editor: Story = () => {
   const content = `

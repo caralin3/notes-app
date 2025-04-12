@@ -1,5 +1,9 @@
-import { Story } from '@ladle/react';
+import { Story, StoryDefault } from '@ladle/react';
 import { Stack, Typography, TypographyProps } from '@mui/material';
+
+export default {
+  title: 'Components / Typography',
+} satisfies StoryDefault;
 
 interface VariantsStoryProps {
   color: TypographyProps['color'];
