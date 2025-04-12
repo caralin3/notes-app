@@ -1,37 +1,64 @@
-import { useState } from 'react';
+import './App.css';
 
-import type { Navigation } from '@toolpad/core';
+import { useEffect, useMemo, useState } from 'react';
+
+import type { Authentication } from '@toolpad/core';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
 import { Outlet } from 'react-router';
 
-import './App.css';
-
-const NAVIGATION: Navigation = [
-  {
-    kind: 'header',
-    title: 'Main items',
-  },
-  {
-    title: 'Dashboard',
-    // icon: <DashboardIcon />,
-  },
-  {
-    segment: 'orders',
-    title: 'Orders',
-    // icon: <ShoppingCartIcon />,
-  },
-];
+import { type Session, SessionContext } from './contexts/SessionContext';
+import { NAVIGATION } from './router';
 
 const BRANDING = {
   title: 'My Toolpad Core App',
 };
 
+const AUTHENTICATION: Authentication = {
+  signIn: () => {},
+  signOut: () => {},
+};
+
 function App() {
-  const [count, setCount] = useState(0);
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const sessionContextValue = useMemo(
+    () => ({
+      session,
+      setSession,
+      loading,
+    }),
+    [session, loading],
+  );
+
+  useEffect(() => {
+    // Returns an `unsubscribe` function to be called during teardown
+    // const unsubscribe = onAuthStateChanged((user: User | null) => {
+    //   if (user) {
+    //     setSession({
+    //       user: {
+    //         name: user.displayName || '',
+    //         email: user.email || '',
+    //         image: user.photoURL || '',
+    //       },
+    //     });
+    //   } else {
+    //     setSession(null);
+    //   }
+    //   setLoading(false);
+    // });
+    // return () => unsubscribe();
+  }, []);
 
   return (
-    <ReactRouterAppProvider navigation={NAVIGATION} branding={BRANDING}>
-      <Outlet />
+    <ReactRouterAppProvider
+      navigation={NAVIGATION}
+      branding={BRANDING}
+      session={session}
+      authentication={AUTHENTICATION}>
+      <SessionContext.Provider value={sessionContextValue}>
+        <Outlet />
+      </SessionContext.Provider>
     </ReactRouterAppProvider>
     // <AppProvider>
     //   <Box>

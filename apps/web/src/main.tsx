@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import './index.css';
 import App from './App.tsx';
 import { Layout } from './layouts/Dashboard.tsx';
+import { router } from './router';
 
 // const router = createBrowserRouter([
 //   {
@@ -28,22 +29,6 @@ import { Layout } from './layouts/Dashboard.tsx';
 //     ],
 //   },
 // ]);
-
-const router = createBrowserRouter([
-  {
-    Component: App,
-    children: [
-      {
-        path: '/',
-        Component: Layout,
-      },
-      {
-        path: '/orders',
-        Component: Layout,
-      },
-    ],
-  },
-]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
