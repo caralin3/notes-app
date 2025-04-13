@@ -31,7 +31,8 @@ export function convertToOSLabel(label: string) {
       .replace(/Alt/g, '⌥')
       .replace(/Shift/g, '⇧')
       .replace(/Cmd/g, '⌘')
-      .replace(/\+/g, '');
+      .replace(/\+/g, '')
+      .replace(/\s/g, '');
   } else if (os === 'Linux') {
     return label.replace(/Ctrl/g, 'Ctrl');
   }

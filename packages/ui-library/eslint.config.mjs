@@ -82,5 +82,13 @@ export default tseslint.config(
         },
       },
     },
+    overrides: [
+      {
+        files: ['tests/**/*'],
+        env: {
+          jest: true,
+        },
+      },
+    ],
   },
 );
