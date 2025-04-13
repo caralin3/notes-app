@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
           },
           {
             path: 'orders',
-            // Component: OrdersPage,
+            Component: AllNotesPage,
           },
           {
             path: '/sign-in',

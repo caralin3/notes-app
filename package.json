@@ -16,7 +16,7 @@
     "ui-library:pretty": "yarn workspace @notes-app/ui-library run pretty",
     "ui-library:ladle:serve": "yarn workspace @notes-app/ui-library run ladle:serve",
     "ui-library:ladle:build": "yarn workspace @notes-app/ui-library run ladle:build",
-    "web:dev": "yarn workspace @notes-app/web run dev",
+    "web:dev": "yarn run ui-library:build && yarn workspace @notes-app/web run dev",
     "web:build": "yarn workspace @notes-app/web run build",
     "web:lint": "yarn workspace @notes-app/web run lint",
     "web:pretty": "yarn workspace @notes-app/web run pretty",
