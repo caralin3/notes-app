@@ -8,6 +8,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import EditIcon from '@mui/icons-material/Edit';
 import FolderIcon from '@mui/icons-material/Folder';
 import InventoryIcon from '@mui/icons-material/Inventory';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
@@ -39,6 +40,7 @@ export {
   FolderIcon,
   Grid,
   InventoryIcon,
+  LibraryBooksIcon,
   MoreHorizIcon,
   MoreVertIcon,
   NoteAddIcon,

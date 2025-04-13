@@ -11,6 +11,7 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import EditIcon from '@mui/icons-material/Edit';
 import FolderIcon from '@mui/icons-material/Folder';
 import InventoryIcon from '@mui/icons-material/Inventory';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
@@ -52,6 +53,7 @@ export const Icons: Story<IconsStoryProps> = (props: IconsStoryProps) => {
     { icon: <EditIcon {...props} />, label: 'Edit' },
     { icon: <FolderIcon {...props} />, label: 'Folder' },
     { icon: <InventoryIcon {...props} />, label: 'Inventory' },
+    { icon: <LibraryBooksIcon {...props} />, label: 'Library Books' },
     { icon: <MoreHorizIcon {...props} />, label: 'More Horiz' },
     { icon: <MoreVertIcon {...props} />, label: 'More Vert' },
     { icon: <NoteAddIcon {...props} />, label: 'Note Add' },

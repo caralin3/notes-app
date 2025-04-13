@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
             Component: AllNotesPage,
           },
           {
-            path: 'orders',
+            path: 'folder/:slug',
             Component: AllNotesPage,
           },
           {

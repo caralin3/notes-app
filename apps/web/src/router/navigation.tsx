@@ -1,11 +1,22 @@
 import {
   AddIcon,
-  DashboardIcon,
+  DescriptionIcon,
   FolderIcon,
+  LibraryBooksIcon,
   PopoverMenu,
   ShortcutLabel,
 } from '@notes-app/ui-library';
 import { Navigation } from '@toolpad/core';
+
+// https://github.com/mui/toolpad/issues/3934
+
+const notes = [
+  {
+    segment: '1',
+    title: 'Note 1',
+    icon: <DescriptionIcon />,
+  },
+];
 
 export const NAVIGATION: Navigation = [
   // {
@@ -14,7 +25,7 @@ export const NAVIGATION: Navigation = [
   // },
   {
     title: 'All Notes',
-    icon: <DashboardIcon />,
+    icon: <LibraryBooksIcon />,
     action: (
       <PopoverMenu
         icon={<AddIcon />}
@@ -38,29 +49,26 @@ export const NAVIGATION: Navigation = [
     title: 'Notes',
   },
   {
-    segment: 'orders',
+    segment: 'folder',
     title: 'Folder',
     icon: <FolderIcon />,
     action: (
       <PopoverMenu
         items={[
           {
-            label: 'Edit',
-            onClick: () => console.log('Edit'),
+            label: <ShortcutLabel label="New Note" shortcut="Ctrl + N" />,
+            onClick: () => console.log('Add new note'),
           },
           {
-            label: 'Delete',
-            onClick: () => console.log('Delete'),
+            label: (
+              <ShortcutLabel label="New Folder" shortcut="Ctrl + Shift + N" />
+            ),
+            onClick: () => console.log('Add new folder'),
           },
         ]}
       />
     ),
-    // pattern: 'inbox/:id',
-    // children: [
-    //   {
-    //     segment: 'test',
-    //     title: 'Test',
-    //   },
-    // ],
+    pattern: 'folder/:slug',
+    children: notes,
   },
 ];
