@@ -20,13 +20,13 @@
     "ui-library:test:watch": "yarn workspace @notes-app/ui-library run test:watch",
     "ui-library:test:coverage": "yarn workspace @notes-app/ui-library run test:coverage",
     "web:dev": "yarn run ui-library:build && yarn workspace @notes-app/web run dev",
-    "web:build": "yarn workspace @notes-app/web run build",
+    "web:build": "yarn run ui-library:build && yarn workspace @notes-app/web run build",
     "web:lint": "yarn workspace @notes-app/web run lint",
     "web:pretty": "yarn workspace @notes-app/web run pretty",
     "web:preview": "yarn workspace @notes-app/web run preview",
     "mobile:start": "yarn workspace @notes-app/mobile run start",
-    "electron:dev": "yarn workspace @notes-app/electron dev",
-    "electron:preview": "yarn workspace @notes-app/electron preview",
+    "electron:dev": "yarn run ui-library:build && yarn workspace @notes-app/electron dev",
+    "electron:preview": "yarn run ui-library:build && yarn workspace @notes-app/electron preview",
     "electron:lint": "yarn workspace @notes-app/electron run lint",
     "electron:pretty": "yarn workspace @notes-app/electron run pretty",
     "dev": "concurrently --names \"ui-library,electron,web\" --prefix-colors \"blue,green,yellow\" \"yarn run ui-library:watch\" \"yarn run electron:dev\" \"yarn run web:dev\"",
@@ -34,6 +34,17 @@
     "lint": "concurrently --names \"ui-library,electron,web\" --prefix-colors \"blue,green,yellow\" \"yarn run ui-library:lint\" \"yarn run electron:lint\" \"yarn run web:lint\""
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "@aws-amplify/backend": "^1.15.0",
+    "@aws-amplify/backend-cli": "^1.5.0",
+    "aws-cdk": "^2.1003.0",
+    "aws-cdk-lib": "^2.180.0",
+    "concurrently": "^9.1.2",
+    "constructs": "^10.4.2",
+    "esbuild": "^0.25.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "aws-amplify": "^6.14.2"
   }
 }
