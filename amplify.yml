@@ -1,11 +1,12 @@
 version: 1
 applications:
-  - backend:
+  - appRoot: apps/web
+    backend:
       phases:
         build:
           commands:
             - amplifyPush --simple
-  - frontend:
+    frontend:
       phases:
         preBuild:
           commands:
@@ -22,4 +23,3 @@ applications:
         paths:
           - node_modules/**/*
       buildPath: /
-    appRoot: apps/web
