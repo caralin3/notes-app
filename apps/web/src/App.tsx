@@ -4,10 +4,12 @@ import { useEffect, useMemo, useState } from 'react';
 
 import type { Authentication } from '@toolpad/core';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
+import { Hub } from 'aws-amplify/utils';
 import { Outlet } from 'react-router';
 
 import { type Session, SessionContext } from './contexts/SessionContext';
 import { NAVIGATION } from './router';
+import { amplifyHubListener } from './services/amplify';
 
 const BRANDING = {
   title: 'My Toolpad Core App',
@@ -32,6 +34,12 @@ function App() {
   );
 
   useEffect(() => {
+    /* start listening for messages */
+    const hubListenerCancelToken = Hub.listen('auth', (data) => {
+      console.log('data', data);
+      amplifyHubListener(data.payload);
+    });
+
     // Returns an `unsubscribe` function to be called during teardown
     // const unsubscribe = onAuthStateChanged((user: User | null) => {
     //   if (user) {
@@ -48,6 +56,7 @@ function App() {
     //   setLoading(false);
     // });
     // return () => unsubscribe();
+    return () => hubListenerCancelToken();
   }, []);
 
   return (
