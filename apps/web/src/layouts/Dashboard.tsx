@@ -5,24 +5,24 @@ import { Navigate, Outlet, useLocation } from 'react-router';
 import { useSession } from '../contexts/SessionContext';
 
 export function Layout() {
-  // const { session, loading } = useSession();
+  const { session, loading } = useSession();
   const location = useLocation();
 
-  // if (loading) {
-  //   return (
-  //     <div style={{ width: '100%' }}>
-  //       Loading
-  //       {/* <LinearProgress /> */}
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div style={{ width: '100%' }}>
+        Loading
+        {/* <LinearProgress /> */}
+      </div>
+    );
+  }
 
-  // if (!session) {
-  //   // Add the `callbackUrl` search parameter
-  //   const redirectTo = `/sign-in?callbackUrl=${encodeURIComponent(location.pathname)}`;
+  if (!session) {
+    // Add the `callbackUrl` search parameter
+    const redirectTo = `/sign-in?callbackUrl=${encodeURIComponent(location.pathname)}`;
 
-  //   return <Navigate to={redirectTo} replace />;
-  // }
+    return <Navigate to={redirectTo} replace />;
+  }
 
   return (
     <DashboardLayout>

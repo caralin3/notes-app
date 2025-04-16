@@ -2,6 +2,7 @@ import './App.css';
 
 import { useEffect, useMemo, useState } from 'react';
 
+import { onAuthStateChanged, type User } from '@notes-app/database';
 import type { Authentication } from '@toolpad/core';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
 import { Outlet } from 'react-router';
@@ -33,21 +34,21 @@ function App() {
 
   useEffect(() => {
     // Returns an `unsubscribe` function to be called during teardown
-    // const unsubscribe = onAuthStateChanged((user: User | null) => {
-    //   if (user) {
-    //     setSession({
-    //       user: {
-    //         name: user.displayName || '',
-    //         email: user.email || '',
-    //         image: user.photoURL || '',
-    //       },
-    //     });
-    //   } else {
-    //     setSession(null);
-    //   }
-    //   setLoading(false);
-    // });
-    // return () => unsubscribe();
+    const unsubscribe = onAuthStateChanged((user: User | null) => {
+      if (user) {
+        setSession({
+          user: {
+            name: user.displayName || '',
+            email: user.email || '',
+            image: user.photoURL || '',
+          },
+        });
+      } else {
+        setSession(null);
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
   }, []);
 
   return (
