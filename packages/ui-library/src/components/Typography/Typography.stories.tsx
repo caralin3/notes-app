@@ -5,15 +5,15 @@ export default {
   title: 'Components / Typography',
 } satisfies StoryDefault;
 
-interface VariantsStoryProps {
+interface TypographyStoryProps {
   color: TypographyProps['color'];
   text: string;
 }
 
-export const Variants: Story<VariantsStoryProps> = ({
+export const TypographyStory: Story<TypographyStoryProps> = ({
   color,
   text,
-}: VariantsStoryProps) => {
+}: TypographyStoryProps) => {
   const getText = (str: string) => {
     if (text !== '') {
       return text;
@@ -66,12 +66,14 @@ export const Variants: Story<VariantsStoryProps> = ({
   );
 };
 
-Variants.args = {
+TypographyStory.storyName = 'Typography';
+
+TypographyStory.args = {
   color: 'textPrimary',
   text: '',
 };
 
-Variants.argTypes = {
+TypographyStory.argTypes = {
   color: {
     control: {
       type: 'select',

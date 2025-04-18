@@ -1,3 +1,4 @@
+import { Box, Container, LinearProgress } from '@notes-app/ui-library';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import { Navigate, Outlet, useLocation } from 'react-router';
@@ -10,10 +11,18 @@ export function Layout() {
 
   if (loading) {
     return (
-      <div style={{ width: '100%' }}>
-        Loading
-        {/* <LinearProgress /> */}
-      </div>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+        }}
+      >
+        <Container component="main" maxWidth="xs">
+          <LinearProgress />
+        </Container>
+      </Box>
     );
   }
 

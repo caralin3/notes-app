@@ -17,7 +17,9 @@ import SaveAsIcon from '@mui/icons-material/SaveAs';
 import StarIcon from '@mui/icons-material/Star';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import LinearProgress from '@mui/material/LinearProgress';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
@@ -32,6 +34,7 @@ export {
   AddIcon,
   ArticleIcon,
   Box,
+  Container,
   ContentCopyIcon,
   CreateNewFolderIcon,
   DashboardIcon,
@@ -42,6 +45,7 @@ export {
   Grid,
   InventoryIcon,
   LibraryBooksIcon,
+  LinearProgress,
   MoreHorizIcon,
   MoreVertIcon,
   NoteAddIcon,
