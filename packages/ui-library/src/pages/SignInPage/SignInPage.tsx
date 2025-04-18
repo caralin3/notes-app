@@ -1,13 +1,16 @@
 import { Box, Container, Link, Paper, Stack, Typography } from '@mui/material';
 import { Button } from '../../components/Button';
 import { TextField } from '../../components/TextField';
-import { SignUpPageProps } from './SignUpPage.types';
+import { SignInPageProps } from './SignInPage.types';
 import { useMemo, useState } from 'react';
 
-export function SignUpPage({ addUser, onSignUp, signInLink }: SignUpPageProps) {
+export function SignInPage({
+  onSignIn,
+  onSubmit,
+  signInLink,
+}: SignInPageProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -18,17 +21,14 @@ export function SignUpPage({ addUser, onSignUp, signInLink }: SignUpPageProps) {
   };
 
   const isFormValid = useMemo(() => {
-    if (!email || !password || !confirmPassword) {
-      return false;
-    }
-    if (password !== confirmPassword) {
+    if (!email || !password) {
       return false;
     }
     if (password.length < 6) {
       return false;
     }
     return true;
-  }, [email, password, confirmPassword]);
+  }, [email, password]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,13 +42,16 @@ export function SignUpPage({ addUser, onSignUp, signInLink }: SignUpPageProps) {
     setLoading(true);
 
     try {
-      const { success, error, user } = await onSignUp(email, password);
+      const { success, error, user } = await onSignIn(email, password);
       if (!success) {
         setError(error);
       }
 
       if (success && !!user && !!user.email) {
-        addUser({ email: user.email, uid: user.uid });
+        onSubmit({
+          email: user.email,
+          uid: user.uid,
+        });
       }
     } catch (error) {
       setError('An unexpected error occurred. Please try again.');
@@ -69,9 +72,11 @@ export function SignUpPage({ addUser, onSignUp, signInLink }: SignUpPageProps) {
         <Paper elevation={3} sx={{ padding: 4 }}>
           <Stack spacing={2} alignItems="center">
             <Typography component="h1" variant="h5" fontWeight="bold">
-              Sign Up
+              Sign In
             </Typography>
-            <Typography variant="body2">Create a new account below</Typography>
+            <Typography variant="body2">
+              Welcome back, please sign in below
+            </Typography>
             <Stack
               spacing={2}
               component="form"
@@ -103,22 +108,6 @@ export function SignUpPage({ addUser, onSignUp, signInLink }: SignUpPageProps) {
                     : undefined
                 }
               />
-              <TextField
-                label="Confirm Password"
-                type="password"
-                required
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                  handleChange();
-                }}
-                value={confirmPassword}
-                error={password !== confirmPassword}
-                helperText={
-                  password !== confirmPassword
-                    ? 'Passwords do not match'
-                    : undefined
-                }
-              />
               {error && (
                 <Typography variant="body2" color="error">
                   {error}
@@ -126,13 +115,13 @@ export function SignUpPage({ addUser, onSignUp, signInLink }: SignUpPageProps) {
               )}
               <Stack pt={1} spacing={2}>
                 <Button
-                  label="Sign Up"
+                  label="Sign In"
                   variant="contained"
                   type="submit"
                   disabled={loading || !isFormValid}
                 />
                 <Typography variant="body2" align="center">
-                  Already have an account?
+                  Don't have an account yet?
                   <Link
                     component="span"
                     variant="body2"
