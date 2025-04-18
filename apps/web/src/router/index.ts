@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router';
 
 import App from '../App';
 import { Layout } from '../layouts/Dashboard';
-import { SignIn } from '../pages/index.ts';
+import { SignIn, SignUp } from '../pages/index.ts';
 
 export { NAVIGATION } from './navigation.tsx';
 
@@ -28,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: '/sign-in',
         Component: SignIn,
+      },
+      {
+        path: '/sign-up',
+        Component: SignUp,
       },
     ],
   },
