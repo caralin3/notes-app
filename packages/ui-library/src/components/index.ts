@@ -25,6 +25,7 @@ export { Button } from './Button';
 export { IconButton } from './IconButton';
 export { PopoverMenu } from './PopoverMenu';
 export { ShortcutLabel } from './ShortcutLabel';
+export { TextField } from './TextField';
 export { Tiptap } from './Tiptap';
 
 export {
