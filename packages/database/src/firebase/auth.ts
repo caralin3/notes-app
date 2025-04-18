@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   browserSessionPersistence,
+  createUserWithEmailAndPassword,
   GithubAuthProvider,
   GoogleAuthProvider,
   setPersistence,
@@ -80,6 +81,32 @@ export async function signInWithCredentials(email: string, password: string) {
       success: false,
       user: null,
       error: error.message || 'Failed to sign in with email/password',
+    };
+  }
+}
+
+// Sign up with email and password
+export async function signUpWithCredentials(email: string, password: string) {
+  try {
+    return setPersistence(firebaseAuth, browserSessionPersistence).then(
+      async () => {
+        const userCredential = await createUserWithEmailAndPassword(
+          firebaseAuth,
+          email,
+          password,
+        );
+        return {
+          success: true,
+          user: userCredential.user,
+          error: null,
+        };
+      },
+    );
+  } catch (error: any) {
+    return {
+      success: false,
+      user: null,
+      error: error.message || 'Failed to sign up with email/password',
     };
   }
 }
