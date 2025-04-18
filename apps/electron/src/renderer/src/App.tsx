@@ -1,58 +1,69 @@
-import type { Navigation } from '@toolpad/core';
+import { useEffect, useMemo, useState } from 'react';
+
+import {
+  firebaseSignOut,
+  onAuthStateChanged,
+  type User,
+} from '@notes-app/database';
+import type { Authentication } from '@toolpad/core';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
 import { Outlet } from 'react-router';
 
-const NAVIGATION: Navigation = [
-  {
-    kind: 'header',
-    title: 'Main items'
-  },
-  {
-    title: 'Dashboard'
-    // icon: <DashboardIcon />,
-  },
-  {
-    segment: 'orders',
-    title: 'Orders'
-    // icon: <ShoppingCartIcon />,
-  }
-];
+import { type Session, SessionContext } from './contexts/SessionContext';
+import { NAVIGATION } from './router';
 
 const BRANDING = {
-  title: 'My Toolpad Core App'
+  title: 'My Toolpad Core App',
 };
 
-function App(): JSX.Element {
-  // const ipcHandle = (): void => window.electron.ipcRenderer.send('ping');
+const AUTHENTICATION: Authentication = {
+  signIn: () => {},
+  signOut: firebaseSignOut,
+};
+
+function App() {
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const sessionContextValue = useMemo(
+    () => ({
+      session,
+      setSession,
+      loading,
+    }),
+    [session, loading]
+  );
+
+  useEffect(() => {
+    // Returns an `unsubscribe` function to be called during teardown
+    const unsubscribe = onAuthStateChanged((user: User | null) => {
+      if (user) {
+        setSession({
+          user: {
+            name: user.displayName || '',
+            email: user.email || '',
+            image: user.photoURL || '',
+          },
+        });
+      } else {
+        setSession(null);
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
-    <ReactRouterAppProvider navigation={NAVIGATION} branding={BRANDING}>
-      <Outlet />
+    <ReactRouterAppProvider
+      navigation={NAVIGATION}
+      branding={BRANDING}
+      session={session}
+      authentication={AUTHENTICATION}
+    >
+      <SessionContext.Provider value={sessionContextValue}>
+        <Outlet />
+      </SessionContext.Provider>
     </ReactRouterAppProvider>
-    // <>
-    //   <img alt="logo" className="logo" src={electronLogo} />
-    //   <Typography className="creator">Powered by electron-vite</Typography>
-    //   <div className="text">
-    //     Build an Electron app with <span className="react">React</span>
-    //     &nbsp;and <span className="ts">TypeScript</span>
-    //   </div>
-    //   <p className="tip">
-    //     Please try pressing <code>F12</code> to open the devTool
-    //   </p>
-    //   <div className="actions">
-    //     <div className="action">
-    //       <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-    //         Documentation
-    //       </a>
-    //     </div>
-    //     <div className="action">
-    //       <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-    //         Send IPC
-    //       </a>
-    //     </div>
-    //   </div>
-    //   <Versions></Versions>
-    // </>
   );
 }
 

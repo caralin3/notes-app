@@ -26,6 +26,7 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^4.0.0",
+    "@notes-app/database": "1.0.0",
     "@notes-app/ui-library": "1.0.0",
     "@toolpad/core": "^0.13.0",
     "electron-updater": "^6.3.9",
