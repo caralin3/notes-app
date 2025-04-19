@@ -2,7 +2,10 @@ import { PropsWithChildren } from 'react';
 
 import { Story, StoryDefault } from '@ladle/react';
 import AddIcon from '@mui/icons-material/Add';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArticleIcon from '@mui/icons-material/Article';
+import ChecklistIcon from '@mui/icons-material/Checklist';
+import Code from '@mui/icons-material/Code';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -11,6 +14,10 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 import EditIcon from '@mui/icons-material/Edit';
 import FolderIcon from '@mui/icons-material/Folder';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -47,7 +54,10 @@ export const Icons: Story<IconsStoryProps> = (props: IconsStoryProps) => {
 
   const items = [
     { icon: <AddIcon {...props} />, label: 'Add' },
+    { icon: <ArrowDropDownIcon {...props} />, label: 'Arrow Drop Down' },
     { icon: <ArticleIcon {...props} />, label: 'Article' },
+    { icon: <ChecklistIcon {...props} />, label: 'Checklist' },
+    { icon: <Code {...props} />, label: 'Code' },
     { icon: <ContentCopyIcon {...props} />, label: 'Content Copy' },
     { icon: <CreateNewFolderIcon {...props} />, label: 'Create New Folder' },
     { icon: <DashboardIcon {...props} />, label: 'Dashboard' },
@@ -56,6 +66,16 @@ export const Icons: Story<IconsStoryProps> = (props: IconsStoryProps) => {
     { icon: <DriveFileMoveIcon {...props} />, label: 'Drive File Move' },
     { icon: <EditIcon {...props} />, label: 'Edit' },
     { icon: <FolderIcon {...props} />, label: 'Folder' },
+    {
+      icon: <FormatListBulletedIcon {...props} />,
+      label: 'Format List Bulleted',
+    },
+    {
+      icon: <FormatListNumberedIcon {...props} />,
+      label: 'Format List Numbered',
+    },
+    { icon: <FormatQuoteIcon {...props} />, label: 'Format Quote' },
+    { icon: <HorizontalRuleIcon {...props} />, label: 'Horizontal Rule' },
     { icon: <InventoryIcon {...props} />, label: 'Inventory' },
     { icon: <LibraryBooksIcon {...props} />, label: 'Library Books' },
     { icon: <MoreHorizIcon {...props} />, label: 'More Horiz' },

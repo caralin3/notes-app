@@ -1,3 +1,4 @@
+import ChecklistIcon from '@mui/icons-material/Checklist';
 import Code from '@mui/icons-material/Code';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
@@ -136,6 +137,14 @@ export const MenuBar = () => {
         tooltip={getTooltipLabel('Ordered List', 'Shift + 7')}
         tooltipPlacement="top">
         <FormatListNumberedIcon fontSize="small" />
+      </Button>
+      <Button
+        onClick={() => editor.chain().focus().toggleTaskList().run()}
+        disabled={!editor.can().chain().focus().toggleTaskList().run()}
+        selected={isActive('taskList')}
+        tooltip={getTooltipLabel('Task List', '[ ]')}
+        tooltipPlacement="top">
+        <ChecklistIcon fontSize="small" />
       </Button>
     </ButtonGroup>
   );

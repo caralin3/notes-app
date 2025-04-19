@@ -17,6 +17,55 @@
     }
   }
 
+  /* Task list specific styles */
+  ul[data-type='taskList'] {
+    list-style: none;
+    margin-left: 0;
+    padding: 0;
+
+    li {
+      align-items: flex-start;
+      display: flex;
+
+      > label {
+        flex: 0 0 auto;
+        margin-right: 0.5rem;
+        user-select: none;
+      }
+
+      > div {
+        flex: 1 1 auto;
+      }
+    }
+
+    input[type='checkbox'] {
+      cursor: pointer;
+      @apply appearance-none;
+      @apply relative;
+      @apply cursor-pointer;
+      @apply transition-all;
+      @apply border-2 border-slate-300 rounded-sm;
+      @apply h-5 w-5;
+      @apply checked:bg-blue-600;
+      @apply checked:border-blue-600;
+      @apply checked:after:content-['✓'];
+      @apply checked:after:text-white;
+      @apply checked:after:text-sm;
+      @apply checked:after:font-bold;
+      @apply checked:after:absolute;
+      @apply checked:after:left-0.5;
+
+      &:checked::after {
+        line-height: 1;
+        bottom: 1px;
+      }
+    }
+
+    ul[data-type='taskList'] {
+      margin: 0;
+    }
+  }
+
   /* Code styling */
   pre {
     background: black;

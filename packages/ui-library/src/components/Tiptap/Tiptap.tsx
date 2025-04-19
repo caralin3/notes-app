@@ -1,5 +1,7 @@
 import './Tiptap.css';
 
+import TaskItem from '@tiptap/extension-task-item';
+import TaskList from '@tiptap/extension-task-list';
 import { EditorProvider } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
@@ -36,6 +38,8 @@ const extensions = [
   CustomListItem(),
   CustomOrderedList(),
   CustomParagraph(),
+  TaskList,
+  TaskItem.configure({ nested: true }),
 ];
 
 export const Tiptap = ({ content }: TiptapProps) => {

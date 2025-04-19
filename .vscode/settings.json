@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["lowlight", "tiptap", "toolpad"]
+  "cSpell.words": ["lowlight", "tiptap", "toolpad"],
+  "css.lint.unknownAtRules": "ignore"
 }
