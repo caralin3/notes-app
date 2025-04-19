@@ -1,4 +1,5 @@
 import MuiTooltip, { tooltipClasses } from '@mui/material/Tooltip';
+
 import { TooltipProps } from './Tooltip.types';
 
 export const Tooltip = ({ children, ...props }: TooltipProps) => (

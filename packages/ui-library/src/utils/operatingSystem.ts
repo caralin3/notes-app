@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 export function getOS() {
   // if a browser has no support for navigator.userAgentData.platform use platform as fallback
   const userAgent = (

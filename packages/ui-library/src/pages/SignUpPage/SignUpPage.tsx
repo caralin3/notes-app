@@ -1,8 +1,10 @@
+import { useMemo, useState } from 'react';
+
 import { Box, Container, Link, Paper, Stack, Typography } from '@mui/material';
+
+import { SignUpPageProps } from './SignUpPage.types';
 import { Button } from '../../components/Button';
 import { TextField } from '../../components/TextField';
-import { SignUpPageProps } from './SignUpPage.types';
-import { useMemo, useState } from 'react';
 
 export function SignUpPage({ addUser, onSignUp, signInLink }: SignUpPageProps) {
   const [email, setEmail] = useState('');

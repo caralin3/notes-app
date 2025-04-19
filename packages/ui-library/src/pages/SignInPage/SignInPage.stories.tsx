@@ -1,7 +1,7 @@
 import { action, type Story, type StoryDefault } from '@ladle/react';
+import Link from '@mui/material/Link';
 
 import { SignInPage } from './SignInPage';
-import Link from '@mui/material/Link';
 
 export default {
   title: 'Pages',

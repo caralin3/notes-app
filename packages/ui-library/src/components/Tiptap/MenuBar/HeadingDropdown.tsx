@@ -1,4 +1,5 @@
 import { Editor } from '@tiptap/react';
+
 import { PopoverMenu } from '../../PopoverMenu';
 import { ShortcutLabel } from '../../ShortcutLabel';
 

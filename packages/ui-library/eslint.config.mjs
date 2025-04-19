@@ -2,6 +2,7 @@ import js from '@eslint/js';
 import globals from 'globals';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
+import jestPlugin from 'eslint-plugin-jest';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import pluginReact from 'eslint-plugin-react';
@@ -11,6 +12,7 @@ export default tseslint.config(
   { ignores: ['dist'] },
   {
     files: ['**/*.{ts,tsx}'],
+    ignores: ['jest.config.ts'],
     plugins: { js, 'react-hooks': reactHooks, 'react-refresh': reactRefresh },
     languageOptions: { ecmaVersion: 2020, globals: globals.browser },
     extends: [
@@ -28,6 +30,7 @@ export default tseslint.config(
       ],
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-explicit-any': 'off',
       'import/no-unresolved': ['error', { ignore: ['\\.svg\\?url$'] }],
       // this is for sorting WITHIN an import
       'sort-imports': [
@@ -82,13 +85,14 @@ export default tseslint.config(
         },
       },
     },
-    overrides: [
-      {
-        files: ['tests/**/*'],
-        env: {
-          jest: true,
-        },
-      },
-    ],
+  },
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    ignores: ['jest.config.ts'],
+    plugins: { jest: jestPlugin },
+    languageOptions: { ecmaVersion: 2020, globals: globals.jest },
+    rules: {
+      '@typescript-eslint/no-unused-expressions': 'off',
+    },
   },
 );

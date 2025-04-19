@@ -1,8 +1,10 @@
+import { useMemo, useState } from 'react';
+
 import { Box, Container, Link, Paper, Stack, Typography } from '@mui/material';
+
+import { SignInPageProps } from './SignInPage.types';
 import { Button } from '../../components/Button';
 import { TextField } from '../../components/TextField';
-import { SignInPageProps } from './SignInPage.types';
-import { useMemo, useState } from 'react';
 
 export function SignInPage({
   onSignIn,
@@ -121,7 +123,7 @@ export function SignInPage({
                   disabled={loading || !isFormValid}
                 />
                 <Typography variant="body2" align="center">
-                  Don't have an account yet?
+                  Don&apos;t have an account yet?
                   <Link
                     component="span"
                     variant="body2"

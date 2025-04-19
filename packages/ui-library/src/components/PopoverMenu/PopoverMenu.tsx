@@ -2,12 +2,12 @@ import { Fragment, useState } from 'react';
 
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Button, Divider, Typography } from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 import { PopoverMenuProps } from './PopoverMenu.types';
 import { IconButton } from '../IconButton';
-import { Button, Divider, Typography } from '@mui/material';
 
 export const PopoverMenu = ({
   anchorOrigin,

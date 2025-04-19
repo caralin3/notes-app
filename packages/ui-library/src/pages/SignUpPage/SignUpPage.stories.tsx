@@ -1,7 +1,7 @@
 import { action, type Story, type StoryDefault } from '@ladle/react';
+import Link from '@mui/material/Link';
 
 import { SignUpPage } from './SignUpPage';
-import Link from '@mui/material/Link';
 
 export default {
   title: 'Pages',
@@ -10,7 +10,7 @@ export default {
 export const SignUpPageStory: Story = () => (
   <SignUpPage
     addUser={action('Add User')}
-    onSignUp={async (email: string, password: string) => {
+    onSignUp={async (email: string) => {
       action('Sign Up');
       return Promise.resolve({
         success: true,

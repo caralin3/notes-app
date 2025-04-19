@@ -1,4 +1,5 @@
 import { Stack } from '@mui/material';
+
 import { NotePageContainerProps } from './NotePageContainer.types';
 
 export const NotePageContainer = ({ children }: NotePageContainerProps) => (

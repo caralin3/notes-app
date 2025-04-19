@@ -1,7 +1,8 @@
+import { useMemo } from 'react';
+
 import MuiButton from '@mui/material/Button';
 
 import { ButtonProps } from './Button.types';
-import { useMemo } from 'react';
 import { Tooltip } from '../Tooltip';
 
 export const Button = ({

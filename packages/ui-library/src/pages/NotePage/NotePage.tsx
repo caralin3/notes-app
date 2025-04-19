@@ -1,6 +1,6 @@
 import { NotesPageProps } from './NotePage.types';
-import { Tiptap } from '../../components/Tiptap';
 import { NotePageContainer } from '../../components/Containers/NotePageContainer';
+import { Tiptap } from '../../components/Tiptap';
 
 export function NotePage({ content }: NotesPageProps) {
   return (

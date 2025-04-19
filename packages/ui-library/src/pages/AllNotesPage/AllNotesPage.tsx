@@ -1,7 +1,8 @@
-import { Stack, Typography } from '@mui/material';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import { Stack, Typography } from '@mui/material';
+
 import { AllNotesPageProps } from './AllNotesPage.types';
-import { Button, IconButton } from '../../components';
+import { Button } from '../../components';
 import { NotePageContainer } from '../../components/Containers';
 
 export function AllNotesPage({ notes }: AllNotesPageProps) {
@@ -10,7 +11,8 @@ export function AllNotesPage({ notes }: AllNotesPageProps) {
       <NotePageContainer>
         <Stack alignItems="flex-start" spacing={2}>
           <Typography variant="body1">
-            You haven't created any notes yet. Create a new note to get started.
+            You haven&apos;t created any notes yet. Create a new note to get
+            started.
           </Typography>
           <Button
             label="Create New Note"

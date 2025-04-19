@@ -1,6 +1,7 @@
 import { action, Story, StoryDefault } from '@ladle/react';
-import { SplitButton } from './SplitButton';
 import { Stack } from '@mui/material';
+
+import { SplitButton } from './SplitButton';
 
 export default {
   title: 'Components / Button',

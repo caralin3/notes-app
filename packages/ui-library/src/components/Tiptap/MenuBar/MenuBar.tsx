@@ -1,18 +1,18 @@
-import ButtonGroup from '@mui/material/ButtonGroup';
 import Code from '@mui/icons-material/Code';
-import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import RedoIcon from '@mui/icons-material/Redo';
 import UndoIcon from '@mui/icons-material/Undo';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import { useCurrentEditor } from '@tiptap/react';
 
+import { HeadingDropdown } from './HeadingDropdown';
+import { convertToOSLabel } from '../../../utils';
 import { Button } from '../../Button';
 import { PopoverMenu } from '../../PopoverMenu';
 import { ShortcutLabel } from '../../ShortcutLabel';
-import { HeadingDropdown } from './HeadingDropdown';
-import { convertToOSLabel } from '../../../utils';
 
 export const MenuBar = () => {
   const { editor } = useCurrentEditor();

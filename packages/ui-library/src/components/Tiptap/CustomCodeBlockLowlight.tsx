@@ -88,7 +88,7 @@ const CodeBlockComponent = ({
     <NodeViewWrapper className="relative">
       <select
         contentEditable={false}
-        className="absolute top-4 right-4 bg-white text-sm rounded-lg border-r-8 border-transparent py-1 px-2"
+        className="absolute top-2 right-2 bg-white text-sm rounded-lg border-r-8 border-transparent py-1 px-2"
         defaultValue={defaultLanguage}
         onChange={(event) =>
           updateAttributes({ language: event.target.value })
