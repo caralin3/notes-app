@@ -68,7 +68,7 @@ export const NAVIGATION: Navigation = [
         ]}
       />
     ),
-    pattern: 'folder/:slug',
+    pattern: '/folder/:id',
     children: notes,
   },
 ];

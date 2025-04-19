@@ -1,11 +1,29 @@
-import { Box, Container, LinearProgress } from '@notes-app/ui-library';
+import { useCallback } from 'react';
+
+import {
+  Box,
+  Container,
+  LinearProgress,
+  NotesToolbar,
+} from '@notes-app/ui-library';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
-import { PageContainer } from '@toolpad/core/PageContainer';
+import { PageContainer, PageHeader } from '@toolpad/core/PageContainer';
 import { Navigate, Outlet, useLocation } from 'react-router';
 
 import { useSession } from '../contexts/SessionContext';
 
-export function Layout() {
+function CustomPageHeader({ status }: { status: string }) {
+  const CustomPageToolbarComponent = useCallback(
+    () => (
+      <NotesToolbar onDelete={() => {}} onEdit={() => {}} onMove={() => {}} />
+    ),
+    [status]
+  );
+
+  return <PageHeader slots={{ toolbar: CustomPageToolbarComponent }} />;
+}
+
+export function NoteLayout() {
   const { session, loading } = useSession();
   const location = useLocation();
 
@@ -35,7 +53,7 @@ export function Layout() {
 
   return (
     <DashboardLayout>
-      <PageContainer>
+      <PageContainer slots={{ header: CustomPageHeader }}>
         <Outlet />
       </PageContainer>
     </DashboardLayout>

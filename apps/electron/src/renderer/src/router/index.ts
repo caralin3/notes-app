@@ -1,11 +1,10 @@
-import { AllNotesPage } from '@notes-app/ui-library';
 import { createBrowserRouter } from 'react-router';
 
 import App from '../App';
-import { Layout } from '../layouts/Dashboard';
-import { SignIn, SignUp } from '../pages/index.ts';
+import { DefaultLayout, NoteLayout } from '../layouts';
+import { AllNotes, SignIn, SignUp } from '../pages';
 
-export { NAVIGATION } from './navigation.tsx';
+export { NAVIGATION } from './navigation';
 
 export const router = createBrowserRouter([
   {
@@ -13,15 +12,21 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        Component: Layout,
+        Component: DefaultLayout,
         children: [
           {
             path: '',
-            Component: AllNotesPage,
+            Component: AllNotes,
           },
+        ],
+      },
+      {
+        path: '/folder',
+        Component: NoteLayout,
+        children: [
           {
-            path: 'folder/:slug',
-            Component: AllNotesPage,
+            path: '/folder/:slug',
+            Component: AllNotes,
           },
         ],
       },
@@ -36,23 +41,3 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-
-// export const router = createBrowserRouter([
-//   {
-//     Component: App,
-//     children: [
-//       {
-//         path: '/',
-//         Component: Layout,
-//       },
-//       {
-//         path: '/sign-in',
-//         Component: Layout,
-//       },
-//       {
-//         path: '/orders',
-//         Component: Layout,
-//       },
-//     ],
-//   },
-// ]);

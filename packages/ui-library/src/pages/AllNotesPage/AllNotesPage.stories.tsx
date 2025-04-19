@@ -12,7 +12,7 @@ export const AllNotesPageStory: Story = () => (
     <Typography component="h1" variant="h4">
       All Notes
     </Typography>
-    <AllNotesPage />
+    <AllNotesPage notes={[]} />
   </Stack>
 );
 

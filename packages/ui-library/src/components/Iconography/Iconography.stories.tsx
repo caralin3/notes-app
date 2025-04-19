@@ -8,6 +8,7 @@ import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DescriptionIcon from '@mui/icons-material/Description';
+import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 import EditIcon from '@mui/icons-material/Edit';
 import FolderIcon from '@mui/icons-material/Folder';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -50,6 +51,7 @@ export const Icons: Story<IconsStoryProps> = (props: IconsStoryProps) => {
     { icon: <DashboardIcon {...props} />, label: 'Dashboard' },
     { icon: <DeleteIcon {...props} />, label: 'Delete' },
     { icon: <DescriptionIcon {...props} />, label: 'Description' },
+    { icon: <DriveFileMoveIcon {...props} />, label: 'Drive File Move' },
     { icon: <EditIcon {...props} />, label: 'Edit' },
     { icon: <FolderIcon {...props} />, label: 'Folder' },
     { icon: <InventoryIcon {...props} />, label: 'Inventory' },

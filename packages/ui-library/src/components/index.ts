@@ -5,6 +5,7 @@ import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DescriptionIcon from '@mui/icons-material/Description';
+import DriveFileMoveIcon from '@mui/icons-material/DriveFileMove';
 import EditIcon from '@mui/icons-material/Edit';
 import FolderIcon from '@mui/icons-material/Folder';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -29,6 +30,7 @@ export { PopoverMenu } from './PopoverMenu';
 export { ShortcutLabel } from './ShortcutLabel';
 export { TextField } from './TextField';
 export { Tiptap } from './Tiptap';
+export { NotesToolbar } from './Toolbar';
 
 export {
   AddIcon,
@@ -40,6 +42,7 @@ export {
   DashboardIcon,
   DeleteIcon,
   DescriptionIcon,
+  DriveFileMoveIcon,
   EditIcon,
   FolderIcon,
   Grid,
