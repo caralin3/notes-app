@@ -14,8 +14,8 @@ import {
   CustomOrderedList,
 } from './CustomLists';
 import { CustomParagraph } from './CustomParagraph';
-import { TiptapProps } from './Tiptap.types';
 import { MenuBar } from './MenuBar';
+import type { TiptapProps } from './Tiptap.types';
 
 const extensions = [
   StarterKit.configure({

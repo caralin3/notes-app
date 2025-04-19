@@ -13,8 +13,10 @@ export const ShortcutLabel = ({ label, shortcut }: ShortcutLabelProps) => (
       gap: 2,
     }}>
     {label}
-    <Typography variant="subtitle2" component="span" color="textDisabled">
-      {convertToOSLabel(shortcut)}
-    </Typography>
+    {shortcut && (
+      <Typography variant="subtitle2" component="span" color="textDisabled">
+        {convertToOSLabel(shortcut)}
+      </Typography>
+    )}
   </Typography>
 );

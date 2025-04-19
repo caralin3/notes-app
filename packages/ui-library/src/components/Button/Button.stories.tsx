@@ -11,12 +11,14 @@ interface VariantsStoryProps {
   disabled: boolean;
   label: string;
   size: 'small' | 'medium' | 'large';
+  selected?: boolean;
 }
 
 export const Variants: Story<VariantsStoryProps> = ({
   disabled,
   label,
   size,
+  selected,
 }: VariantsStoryProps) => {
   const getLabel = (text: string) => {
     if (label !== '') {
@@ -28,36 +30,45 @@ export const Variants: Story<VariantsStoryProps> = ({
   return (
     <Stack gap={3}>
       <Stack gap={2} flexDirection="row" flexWrap="wrap">
-        <Button label={getLabel('Primary Text')} disabled={disabled} />
+        <Button
+          label={getLabel('Primary Text')}
+          disabled={disabled}
+          selected={selected}
+        />
         <Button
           label={getLabel('Secondary Text')}
           color="secondary"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Error Text')}
           color="error"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Info Text')}
           color="info"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Success Text')}
           color="success"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Warning Text')}
           color="warning"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
       </Stack>
       <Stack gap={2} flexDirection="row" flexWrap="wrap">
@@ -66,6 +77,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           variant="contained"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Secondary Contained')}
@@ -73,6 +85,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           color="secondary"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Error Contained')}
@@ -80,6 +93,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           color="error"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Info Contained')}
@@ -87,6 +101,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           color="info"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Success Contained')}
@@ -94,6 +109,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           color="success"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Warning Contained')}
@@ -101,6 +117,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           color="warning"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
       </Stack>
       <Stack gap={2} flexDirection="row" flexWrap="wrap">
@@ -109,6 +126,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           variant="outlined"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Secondary Outlined')}
@@ -116,6 +134,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           color="secondary"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Error Outlined')}
@@ -123,6 +142,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           color="error"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Info Outlined')}
@@ -137,6 +157,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           color="success"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
         <Button
           label={getLabel('Warning Outlined')}
@@ -144,6 +165,7 @@ export const Variants: Story<VariantsStoryProps> = ({
           color="warning"
           disabled={disabled}
           size={size}
+          selected={selected}
         />
       </Stack>
     </Stack>
@@ -154,6 +176,7 @@ Variants.args = {
   label: '',
   disabled: false,
   size: 'medium',
+  selected: false,
 };
 
 Variants.argTypes = {
