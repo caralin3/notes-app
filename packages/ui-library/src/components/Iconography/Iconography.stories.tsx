@@ -16,10 +16,12 @@ import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import RedoIcon from '@mui/icons-material/Redo';
 import SaveIcon from '@mui/icons-material/Save';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import StarIcon from '@mui/icons-material/Star';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import UndoIcon from '@mui/icons-material/Undo';
 import { Grid, Stack, SvgIconOwnProps, Typography } from '@mui/material';
 
 export default {
@@ -59,10 +61,12 @@ export const Icons: Story<IconsStoryProps> = (props: IconsStoryProps) => {
     { icon: <MoreHorizIcon {...props} />, label: 'More Horiz' },
     { icon: <MoreVertIcon {...props} />, label: 'More Vert' },
     { icon: <NoteAddIcon {...props} />, label: 'Note Add' },
+    { icon: <RedoIcon {...props} />, label: 'Redo' },
     { icon: <SaveIcon {...props} />, label: 'Save' },
     { icon: <SaveAsIcon {...props} />, label: 'Save As' },
     { icon: <StarIcon {...props} />, label: 'Star' },
     { icon: <TextSnippetIcon {...props} />, label: 'Text Snippet' },
+    { icon: <UndoIcon {...props} />, label: 'Undo' },
   ];
 
   return (

@@ -6,10 +6,12 @@ import MenuItem from '@mui/material/MenuItem';
 
 import { PopoverMenuProps } from './PopoverMenu.types';
 import { IconButton } from '../IconButton';
+import { Button } from '@mui/material';
 
 export const PopoverMenu = ({
   anchorOrigin,
   icon,
+  iconButton = true,
   items,
 }: PopoverMenuProps) => {
   const [popoverAnchorEl, setPopoverAnchorEl] =
@@ -32,11 +34,17 @@ export const PopoverMenu = ({
 
   return (
     <Fragment>
-      <IconButton
-        aria-describedby={popoverId}
-        onClick={handlePopoverButtonClick}
-        icon={icon ?? <MoreHorizIcon />}
-      />
+      {iconButton ? (
+        <IconButton
+          aria-describedby={popoverId}
+          onClick={handlePopoverButtonClick}
+          icon={icon ?? <MoreHorizIcon />}
+        />
+      ) : (
+        <Button aria-describedby={popoverId} onClick={handlePopoverButtonClick}>
+          {icon ?? <MoreHorizIcon fontSize="small" />}
+        </Button>
+      )}
       <Menu
         id={popoverId}
         open={isPopoverOpen}

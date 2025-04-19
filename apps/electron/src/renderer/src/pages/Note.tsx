@@ -1,14 +1,9 @@
-import { Story, StoryDefault } from '@ladle/react';
+import { NotePage } from '@notes-app/ui-library';
 
-import { Tiptap } from './Tiptap';
-
-
-export default {
-  title: 'Components / Tiptap',
-} satisfies StoryDefault;
-
-export const Editor: Story = () => {
-  const content = `
+export function Note() {
+  return (
+    <NotePage
+      content={`
 <h1>Header 1</h1>
 <h2>Header 2</h2>
 <h3>Header 3</h3>
@@ -49,7 +44,9 @@ export const Editor: Story = () => {
   <br />
   — Mom
 </blockquote>
-`;
-
-  return <Tiptap content={content} />;
-};
+`}
+      // title="All Notes"
+      // description="All your notes in one place"
+    />
+  );
+}

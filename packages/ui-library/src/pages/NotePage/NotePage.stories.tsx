@@ -1,15 +1,19 @@
-import { Story, StoryDefault } from '@ladle/react';
+import type { Story, StoryDefault } from '@ladle/react';
+import { Stack, Typography } from '@mui/material';
 
-import { Tiptap } from './Tiptap';
-
+import { NotePage } from './NotePage';
 
 export default {
-  title: 'Components / Tiptap',
+  title: 'Pages',
 } satisfies StoryDefault;
 
-export const Editor: Story = () => {
-  const content = `
-<h1>Header 1</h1>
+export const NotesPageStory: Story = () => (
+  <Stack>
+    <Typography component="h1" variant="h4">
+      Note
+    </Typography>
+    <NotePage
+      content={`<h1>Header 1</h1>
 <h2>Header 2</h2>
 <h3>Header 3</h3>
 <h4>Header 4</h4>
@@ -48,8 +52,9 @@ export const Editor: Story = () => {
   Wow, that's amazing. Good work, boy! 👏
   <br />
   — Mom
-</blockquote>
-`;
+</blockquote>`}
+    />
+  </Stack>
+);
 
-  return <Tiptap content={content} />;
-};
+NotesPageStory.storyName = 'Note';

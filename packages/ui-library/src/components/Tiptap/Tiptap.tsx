@@ -15,6 +15,7 @@ import {
 } from './CustomLists';
 import { CustomParagraph } from './CustomParagraph';
 import { TiptapProps } from './Tiptap.types';
+import { MenuBar } from './MenuBar';
 
 const extensions = [
   StarterKit.configure({
@@ -40,7 +41,7 @@ const extensions = [
 export const Tiptap = ({ content }: TiptapProps) => {
   return (
     <EditorProvider
-      // slotBefore={<MenuBar />}
+      slotBefore={<MenuBar />}
       extensions={extensions}
       content={content}
     />

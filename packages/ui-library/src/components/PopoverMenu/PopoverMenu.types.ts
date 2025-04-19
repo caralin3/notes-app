@@ -10,5 +10,6 @@ export interface PopoverMenuItem {
 export interface PopoverMenuProps {
   anchorOrigin?: PopoverOrigin;
   icon?: React.ReactNode;
+  iconButton?: boolean;
   items: PopoverMenuItem[];
 }

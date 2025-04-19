@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router';
 
 import App from '../App';
 import { DefaultLayout, NoteLayout } from '../layouts';
-import { AllNotes, SignIn, SignUp } from '../pages';
+import { AllNotes, Note, SignIn, SignUp } from '../pages';
 
 export { NAVIGATION } from './navigation';
 
@@ -21,12 +21,12 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: '/folder',
+        path: '/:folder',
         Component: NoteLayout,
         children: [
           {
-            path: '/folder/:slug',
-            Component: AllNotes,
+            path: '/:folder/:slug',
+            Component: Note,
           },
         ],
       },
