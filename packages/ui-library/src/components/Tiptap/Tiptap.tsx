@@ -1,15 +1,16 @@
 import './Tiptap.css';
-
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
-import { EditorProvider } from '@tiptap/react';
+import { BubbleMenu, EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
+import { BubbleMenuContent } from './BubbleMenu';
 import { CustomBlockquote } from './CustomBlockquote';
 import { CustomCode } from './CustomCode';
 import { CustomCodeBlockLowlight } from './CustomCodeBlockLowlight';
 import { CustomHeading } from './CustomHeading';
 import { CustomHorizontalRule } from './CustomHorizontalRule';
+import { CustomLink } from './CustomLink';
 import {
   CustomBulletList,
   CustomListItem,
@@ -25,9 +26,11 @@ const extensions = [
     code: false,
     codeBlock: false,
     heading: false,
+    horizontalRule: false,
     bulletList: false,
-    orderedList: false,
     listItem: false,
+    orderedList: false,
+    paragraph: false,
   }),
   CustomBlockquote(),
   CustomBulletList(),
@@ -40,14 +43,26 @@ const extensions = [
   CustomParagraph(),
   TaskList,
   TaskItem.configure({ nested: true }),
+  CustomLink(),
 ];
 
 export const Tiptap = ({ content }: TiptapProps) => {
+  const editor = useEditor({
+    extensions,
+    content,
+  });
+
+  if (!editor) {
+    return null;
+  }
+
   return (
-    <EditorProvider
-      slotBefore={<MenuBar />}
-      extensions={extensions}
-      content={content}
-    />
+    <>
+      <MenuBar editor={editor} />
+      <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
+        {editor.isActive('link') && <BubbleMenuContent editor={editor} />}
+      </BubbleMenu>
+      <EditorContent editor={editor} />
+    </>
   );
 };

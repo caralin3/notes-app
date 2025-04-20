@@ -10,11 +10,13 @@ export default {
 
 interface IconButtonStoryProps {
   disabled: boolean;
+  selected: boolean;
   size: 'small' | 'medium' | 'large';
 }
 
 export const IconButtonStory: Story<IconButtonStoryProps> = ({
   disabled,
+  selected,
   size,
 }: IconButtonStoryProps) => {
   return (
@@ -22,12 +24,14 @@ export const IconButtonStory: Story<IconButtonStoryProps> = ({
       <Stack gap={2} flexDirection="row" flexWrap="wrap">
         <IconButton
           disabled={disabled}
+          selected={selected}
           size={size}
           icon={<MoreVertIcon fontSize={size} />}
         />
 
         <IconButton
           disabled={disabled}
+          selected={selected}
           size={size}
           icon={<MoreVertIcon fontSize={size} />}
           tooltip="More"
@@ -41,6 +45,7 @@ IconButtonStory.storyName = 'Icon Button';
 
 IconButtonStory.args = {
   disabled: false,
+  selected: false,
   size: 'medium',
 };
 

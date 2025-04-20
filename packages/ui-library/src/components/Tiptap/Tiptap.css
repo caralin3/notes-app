@@ -2,10 +2,24 @@
 
 /* Basic editor styles */
 .tiptap {
+  --primary: #1976d2;
+
   outline: none;
 
   :first-child {
     margin-top: 0;
+  }
+
+  /* Link styles */
+  a {
+    color: var(--primary);
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
   }
 
   /* List styles */

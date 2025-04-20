@@ -1,5 +1,7 @@
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import Code from '@mui/icons-material/Code';
+import FormatBoldIcon from '@mui/icons-material/FormatBold';
+import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
@@ -7,17 +9,16 @@ import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import RedoIcon from '@mui/icons-material/Redo';
 import UndoIcon from '@mui/icons-material/Undo';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { useCurrentEditor } from '@tiptap/react';
+import { Editor } from '@tiptap/react';
 
 import { HeadingDropdown } from './HeadingDropdown';
+import { LinkButton } from './LinkButton';
 import { convertToOSLabel } from '../../../utils';
 import { Button } from '../../Button';
 import { PopoverMenu } from '../../PopoverMenu';
 import { ShortcutLabel } from '../../ShortcutLabel';
 
-export const MenuBar = () => {
-  const { editor } = useCurrentEditor();
-
+export const MenuBar = ({ editor }: { editor: Editor }) => {
   if (!editor) {
     return null;
   }
@@ -55,23 +56,21 @@ export const MenuBar = () => {
       </Button>
       <HeadingDropdown editor={editor} isActive={isActive} />
       <Button
-        label="B"
-        sx={{ fontWeight: 'bold' }}
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
         selected={isActive('bold')}
         tooltip={getTooltipLabel('Bold', 'Ctrl + B')}
-        tooltipPlacement="top"
-      />
+        tooltipPlacement="top">
+        <FormatBoldIcon fontSize="small" />
+      </Button>
       <Button
-        label="I"
-        sx={{ fontStyle: 'italic' }}
         onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={!editor.can().chain().focus().toggleItalic().run()}
         selected={isActive('italic')}
         tooltip={getTooltipLabel('Italic', 'Ctrl + I')}
-        tooltipPlacement="top"
-      />
+        tooltipPlacement="top">
+        <FormatItalicIcon fontSize="small" />
+      </Button>
       <PopoverMenu
         iconButton={false}
         anchorOrigin={{
@@ -146,6 +145,10 @@ export const MenuBar = () => {
         tooltipPlacement="top">
         <ChecklistIcon fontSize="small" />
       </Button>
+      <LinkButton
+        editor={editor}
+        tooltip={getTooltipLabel('Link', 'Ctrl + K')}
+      />
     </ButtonGroup>
   );
 };

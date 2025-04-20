@@ -5,6 +5,7 @@ import { Tooltip } from '../Tooltip';
 
 export const IconButton = ({
   icon,
+  selected,
   tooltip,
   tooltipPlacement,
   ...props
@@ -12,9 +13,29 @@ export const IconButton = ({
   if (tooltip) {
     return (
       <Tooltip title={tooltip} placement={tooltipPlacement}>
-        <MuiIconButton {...props}>{icon}</MuiIconButton>
+        <MuiIconButton
+          {...props}
+          sx={{
+            ...(selected && {
+              backgroundColor: (theme) => theme.palette.action.selected,
+              color: (theme) => theme.palette.primary.main,
+            }),
+          }}>
+          {icon}
+        </MuiIconButton>
       </Tooltip>
     );
   }
-  return <MuiIconButton {...props}>{icon}</MuiIconButton>;
+  return (
+    <MuiIconButton
+      {...props}
+      sx={{
+        ...(selected && {
+          backgroundColor: (theme) => theme.palette.action.selected,
+          color: (theme) => theme.palette.primary.main,
+        }),
+      }}>
+      {icon}
+    </MuiIconButton>
+  );
 };

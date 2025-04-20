@@ -14,6 +14,7 @@ export const Editor: Story = () => {
     <li data-type="taskItem" data-checked="false">And another one</li>
   </ul>
   <h2>Header 2</h2>
+  <a href="https://example.com">This is a link</a>
   <h3>Header 3</h3>
   <h4>Header 4</h4>
   <h5>Header 5</h5>
