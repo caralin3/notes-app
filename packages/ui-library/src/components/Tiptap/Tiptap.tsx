@@ -1,4 +1,5 @@
 import './Tiptap.css';
+import { Box } from '@mui/material';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
 import Underline from '@tiptap/extension-underline';
@@ -59,12 +60,12 @@ export const Tiptap = ({ content }: TiptapProps) => {
   }
 
   return (
-    <>
+    <Box position="relative">
       <MenuBar editor={editor} />
       <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
         {editor.isActive('link') && <BubbleMenuContent editor={editor} />}
       </BubbleMenu>
       <EditorContent editor={editor} />
-    </>
+    </Box>
   );
 };

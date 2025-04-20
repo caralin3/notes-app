@@ -19,6 +19,11 @@ export const Editor: Story = () => {
   <h4>Header 4</h4>
   <h5>Header 5</h5>
   <h6>Header 6</h6>
+  <ol>
+    <li>That's a list item</li>
+    <li>And another one</li>
+  </ol>
+  <hr>
   <p>
     this is a <em>basic</em> example of <strong>Tiptap</strong>. Sure, there are all kind of basic text styles you'd probably expect from a text editor. But wait until you see the lists:
   </p>
@@ -44,7 +49,20 @@ export const Editor: Story = () => {
   </ol>
   <pre><code class="language-css">body {
     display: none;
-  }</code></pre>
+  }
+
+
+
+
+
+
+
+
+  .test {
+    display: block;
+}
+    </code>
+  </pre>
   <p>
     I know, I know, this is impressive. It's only the tip of the iceberg though. Give it a try and click a little bit around. Don't forget to check the other examples too.
   </p>
