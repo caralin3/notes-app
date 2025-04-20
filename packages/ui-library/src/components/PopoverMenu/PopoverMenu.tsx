@@ -53,7 +53,7 @@ export const PopoverMenu = ({
           variant="text"
           sx={{
             borderRadius: '8px !important',
-            paddingRight: showArrow ? '5px' : '15px',
+            paddingRight: showArrow ? '0' : '15px',
           }}>
           {label ? (
             <Typography textTransform="capitalize">{label}</Typography>

@@ -1,3 +1,4 @@
+import { useMediaQuery } from '@mui/material';
 import MuiIconButton from '@mui/material/IconButton';
 
 import { IconButtonProps } from './IconButton.types';
@@ -10,6 +11,10 @@ export const IconButton = ({
   tooltipPlacement,
   ...props
 }: IconButtonProps) => {
+  const isTablet = useMediaQuery('(max-width:900px)');
+  const px = isTablet ? 0.5 : 1;
+  const py = isTablet ? 0.25 : 0.5;
+
   if (tooltip) {
     return (
       <Tooltip title={tooltip} placement={tooltipPlacement}>
@@ -21,8 +26,8 @@ export const IconButton = ({
               color: (theme) => theme.palette.primary.main,
             }),
             borderRadius: 2,
-            px: 1,
-            py: 0.5,
+            px,
+            py,
           }}>
           {icon}
         </MuiIconButton>
@@ -38,8 +43,8 @@ export const IconButton = ({
           color: (theme) => theme.palette.primary.main,
         }),
         borderRadius: 2,
-        px: 1,
-        py: 0.5,
+        px,
+        py,
       }}>
       {icon}
     </MuiIconButton>

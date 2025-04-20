@@ -1,3 +1,4 @@
+import { useMediaQuery } from '@mui/material';
 import { Editor } from '@tiptap/react';
 
 import { PopoverMenu } from '../../PopoverMenu';
@@ -9,6 +10,8 @@ interface HeadingDropdownProps {
 }
 
 export const HeadingDropdown = ({ editor, isActive }: HeadingDropdownProps) => {
+  const isTablet = useMediaQuery('(max-width:900px)');
+
   const getHeadingLabel = () => {
     switch (editor.getAttributes('heading').level) {
       case 1:
@@ -43,7 +46,7 @@ export const HeadingDropdown = ({ editor, isActive }: HeadingDropdownProps) => {
   return (
     <PopoverMenu
       showArrow
-      label={getHeadingLabel()}
+      label={isTablet ? 'Tt' : getHeadingLabel()}
       disabled={getDisabled()}
       iconButton={false}
       anchorOrigin={{
