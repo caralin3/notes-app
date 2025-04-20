@@ -50,7 +50,11 @@ export const PopoverMenu = ({
           aria-describedby={popoverId}
           onClick={handlePopoverButtonClick}
           disabled={disabled}
-          sx={{ paddingRight: showArrow ? '5px' : '15px' }}>
+          variant="text"
+          sx={{
+            borderRadius: '8px !important',
+            paddingRight: showArrow ? '5px' : '15px',
+          }}>
           {label ? (
             <Typography textTransform="capitalize">{label}</Typography>
           ) : (

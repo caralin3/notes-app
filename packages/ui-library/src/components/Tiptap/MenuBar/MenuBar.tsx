@@ -8,13 +8,14 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import RedoIcon from '@mui/icons-material/Redo';
 import UndoIcon from '@mui/icons-material/Undo';
+import { Divider } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { Editor } from '@tiptap/react';
 
 import { HeadingDropdown } from './HeadingDropdown';
 import { LinkButton } from './LinkButton';
 import { convertToOSLabel } from '../../../utils';
-import { Button } from '../../Button';
+import { IconButton } from '../../IconButton';
 import { PopoverMenu } from '../../PopoverMenu';
 import { ShortcutLabel } from '../../ShortcutLabel';
 
@@ -39,38 +40,47 @@ export const MenuBar = ({ editor }: { editor: Editor }) => {
   };
 
   return (
-    <ButtonGroup variant="outlined" aria-label="Basic button group">
-      <Button
+    <ButtonGroup
+      aria-label="Menu bar"
+      sx={{
+        border: (theme) => `1px solid ${theme.palette.divider}`,
+        flex: 1,
+        padding: 0.5,
+        width: '100%',
+      }}>
+      <IconButton
+        icon={<UndoIcon fontSize="small" />}
         onClick={() => editor.chain().focus().undo().run()}
         disabled={!editor.can().chain().focus().undo().run()}
         tooltip={getTooltipLabel('Undo', 'Ctrl + Z')}
-        tooltipPlacement="top">
-        <UndoIcon fontSize="small" />
-      </Button>
-      <Button
+        tooltipPlacement="top"
+      />
+      <IconButton
+        icon={<RedoIcon fontSize="small" />}
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().chain().focus().redo().run()}
         tooltip={getTooltipLabel('Redo', 'Ctrl + Shift + Z')}
-        tooltipPlacement="top">
-        <RedoIcon fontSize="small" />
-      </Button>
+        tooltipPlacement="top"
+      />
+      <MenuDivider />
       <HeadingDropdown editor={editor} isActive={isActive} />
-      <Button
+      <MenuDivider />
+      <IconButton
+        icon={<FormatBoldIcon fontSize="small" />}
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
         selected={isActive('bold')}
         tooltip={getTooltipLabel('Bold', 'Ctrl + B')}
-        tooltipPlacement="top">
-        <FormatBoldIcon fontSize="small" />
-      </Button>
-      <Button
+        tooltipPlacement="top"
+      />
+      <IconButton
+        icon={<FormatItalicIcon fontSize="small" />}
         onClick={() => editor.chain().focus().toggleItalic().run()}
         disabled={!editor.can().chain().focus().toggleItalic().run()}
         selected={isActive('italic')}
         tooltip={getTooltipLabel('Italic', 'Ctrl + I')}
-        tooltipPlacement="top">
-        <FormatItalicIcon fontSize="small" />
-      </Button>
+        tooltipPlacement="top"
+      />
       <PopoverMenu
         anchorOrigin={{
           horizontal: 'left',
@@ -102,54 +112,57 @@ export const MenuBar = ({ editor }: { editor: Editor }) => {
           },
         ]}
       />
-      <Button
+      <MenuDivider />
+      <IconButton
+        icon={<Code fontSize="small" />}
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
         selected={isActive('codeBlock')}
         tooltip={getTooltipLabel('Code Block', '```')}
-        tooltipPlacement="top">
-        <Code fontSize="small" />
-      </Button>
-      <Button
+        tooltipPlacement="top"
+      />
+      <IconButton
+        icon={<FormatQuoteIcon fontSize="small" />}
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         disabled={!editor.can().chain().focus().toggleBlockquote().run()}
         selected={isActive('blockquote')}
         tooltip={getTooltipLabel('Blockquote', '>')}
-        tooltipPlacement="top">
-        <FormatQuoteIcon fontSize="small" />
-      </Button>
-      <Button
+        tooltipPlacement="top"
+      />
+      <IconButton
+        icon={<HorizontalRuleIcon fontSize="small" />}
         onClick={() => editor.chain().focus().setHorizontalRule().run()}
         disabled={!editor.can().chain().focus().setHorizontalRule().run()}
         selected={isActive('horizontalRule')}
         tooltip={getTooltipLabel('Horizontal Rule', '---')}
-        tooltipPlacement="top">
-        <HorizontalRuleIcon />
-      </Button>
-      <Button
+        tooltipPlacement="top"
+      />
+      <MenuDivider />
+      <IconButton
+        icon={<FormatListBulletedIcon fontSize="small" />}
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         disabled={!editor.can().chain().focus().toggleBulletList().run()}
         selected={isActive('bulletList')}
         tooltip={getTooltipLabel('Bullet List', 'Shift + 8')}
-        tooltipPlacement="top">
-        <FormatListBulletedIcon fontSize="small" />
-      </Button>
-      <Button
+        tooltipPlacement="top"
+      />
+      <IconButton
+        icon={<FormatListNumberedIcon fontSize="small" />}
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         disabled={!editor.can().chain().focus().toggleOrderedList().run()}
         selected={isActive('orderedList')}
         tooltip={getTooltipLabel('Ordered List', 'Shift + 7')}
-        tooltipPlacement="top">
-        <FormatListNumberedIcon fontSize="small" />
-      </Button>
-      <Button
+        tooltipPlacement="top"
+      />
+      <IconButton
+        icon={<ChecklistIcon fontSize="small" />}
         onClick={() => editor.chain().focus().toggleTaskList().run()}
         disabled={!editor.can().chain().focus().toggleTaskList().run()}
         selected={isActive('taskList')}
         tooltip={getTooltipLabel('Task List', '[ ]')}
-        tooltipPlacement="top">
-        <ChecklistIcon fontSize="small" />
-      </Button>
+        tooltipPlacement="top"
+      />
+      <MenuDivider />
       <LinkButton
         editor={editor}
         tooltip={getTooltipLabel('Link', 'Ctrl + K')}
@@ -157,3 +170,11 @@ export const MenuBar = ({ editor }: { editor: Editor }) => {
     </ButtonGroup>
   );
 };
+
+const MenuDivider = () => (
+  <Divider
+    orientation="vertical"
+    flexItem
+    sx={{ borderWidth: 0.5, mx: 0.5, my: 1 }}
+  />
+);

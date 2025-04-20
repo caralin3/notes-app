@@ -20,6 +20,9 @@ export const IconButton = ({
               backgroundColor: (theme) => theme.palette.action.selected,
               color: (theme) => theme.palette.primary.main,
             }),
+            borderRadius: 2,
+            px: 1,
+            py: 0.5,
           }}>
           {icon}
         </MuiIconButton>
@@ -34,6 +37,9 @@ export const IconButton = ({
           backgroundColor: (theme) => theme.palette.action.selected,
           color: (theme) => theme.palette.primary.main,
         }),
+        borderRadius: 2,
+        px: 1,
+        py: 0.5,
       }}>
       {icon}
     </MuiIconButton>
