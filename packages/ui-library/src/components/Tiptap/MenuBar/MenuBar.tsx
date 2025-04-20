@@ -72,12 +72,17 @@ export const MenuBar = ({ editor }: { editor: Editor }) => {
         <FormatItalicIcon fontSize="small" />
       </Button>
       <PopoverMenu
-        iconButton={false}
         anchorOrigin={{
           horizontal: 'left',
           vertical: 'bottom',
         }}
         items={[
+          {
+            label: <ShortcutLabel label="Underline" shortcut="Ctrl + U" />,
+            onClick: () => editor.chain().focus().toggleUnderline().run(),
+            disabled: !editor.can().chain().focus().toggleUnderline().run(),
+            selected: isActive('underline'),
+          },
           {
             label: (
               <ShortcutLabel

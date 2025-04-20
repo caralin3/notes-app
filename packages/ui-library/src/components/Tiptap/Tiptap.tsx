@@ -1,6 +1,7 @@
 import './Tiptap.css';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
+import Underline from '@tiptap/extension-underline';
 import { BubbleMenu, EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
@@ -44,6 +45,7 @@ const extensions = [
   TaskList,
   TaskItem.configure({ nested: true }),
   CustomLink(),
+  Underline,
 ];
 
 export const Tiptap = ({ content }: TiptapProps) => {
