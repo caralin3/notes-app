@@ -13,6 +13,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { Editor } from '@tiptap/react';
 
 import { HeadingDropdown } from './HeadingDropdown';
+import { ImageButton } from './ImageButton';
 import { LinkButton } from './LinkButton';
 import { convertToOSLabel } from '../../../utils';
 import { IconButton } from '../../IconButton';
@@ -169,6 +170,10 @@ export const MenuBar = ({ editor }: { editor: Editor }) => {
         <LinkButton
           editor={editor}
           tooltip={getTooltipLabel('Link', 'Ctrl + K')}
+        />
+        <ImageButton
+          editor={editor}
+          tooltip={getTooltipLabel('Image', 'Ctrl + Shift + I')}
         />
       </ButtonGroup>
     </Paper>

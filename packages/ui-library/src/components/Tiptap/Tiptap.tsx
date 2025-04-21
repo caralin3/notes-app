@@ -1,5 +1,6 @@
 import './Tiptap.css';
 import { Box } from '@mui/material';
+import Dropcursor from '@tiptap/extension-dropcursor';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
 import Underline from '@tiptap/extension-underline';
@@ -12,6 +13,7 @@ import { CustomCode } from './CustomCode';
 import { CustomCodeBlockLowlight } from './CustomCodeBlockLowlight';
 import { CustomHeading } from './CustomHeading';
 import { CustomHorizontalRule } from './CustomHorizontalRule';
+import { CustomImage } from './CustomImage';
 import { CustomLink } from './CustomLink';
 import {
   CustomBulletList,
@@ -40,12 +42,14 @@ const extensions = [
   CustomCodeBlockLowlight(),
   CustomHeading(),
   CustomHorizontalRule(),
+  CustomImage(),
+  CustomLink(),
   CustomListItem(),
   CustomOrderedList(),
   CustomParagraph(),
+  Dropcursor,
   TaskList,
   TaskItem.configure({ nested: true }),
-  CustomLink(),
   Underline,
 ];
 
