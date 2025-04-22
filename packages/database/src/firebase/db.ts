@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   query,
   setDoc,
@@ -12,7 +13,15 @@ import {
 
 import { firebaseDb } from './config';
 import { FIRESTORE_COLLECTIONS } from './constants';
-import { CreateNoteParams, Note, User } from './types';
+import {
+  CreateFolderParams,
+  CreateNoteParams,
+  Folder,
+  Note,
+  UpdateFolderParams,
+  UpdateNoteParams,
+  User,
+} from './types';
 
 export const createUser = async (user: User) => {
   try {
@@ -38,13 +47,10 @@ export const createNote = async (note: CreateNoteParams) => {
   }
 };
 
-export const updateNote = async (note: Note) => {
+export const updateNote = async (noteId: string, note: UpdateNoteParams) => {
   try {
-    await updateDoc(
-      doc(firebaseDb, FIRESTORE_COLLECTIONS.NOTES, note.id),
-      note,
-    );
-    console.log('Document written with ID: ', note.id);
+    await updateDoc(doc(firebaseDb, FIRESTORE_COLLECTIONS.NOTES, noteId), note);
+    console.log('Document written with ID: ', noteId);
   } catch (e) {
     console.error('Error adding document: ', e);
   }
@@ -70,5 +76,83 @@ export const getNotes = async (userId: string) => {
     return notes;
   } catch (e) {
     console.error('Error getting documents: ', e);
+  }
+};
+
+export const getNote = async (noteId: string) => {
+  try {
+    const docRef = doc(firebaseDb, FIRESTORE_COLLECTIONS.NOTES, noteId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return Note.parse(docSnap.data());
+    } else {
+      console.log('No such document!');
+    }
+  } catch (e) {
+    console.error('Error getting document: ', e);
+  }
+};
+
+export const createFolder = async (folder: CreateFolderParams) => {
+  try {
+    const res = await addDoc(
+      collection(firebaseDb, FIRESTORE_COLLECTIONS.FOLDERS),
+      folder,
+    );
+    console.log('Document written with ID: ', res.id);
+    return res.id;
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+};
+export const updateFolder = async (
+  folderId: string,
+  folder: UpdateFolderParams,
+) => {
+  try {
+    await updateDoc(
+      doc(firebaseDb, FIRESTORE_COLLECTIONS.FOLDERS, folderId),
+      folder,
+    );
+    console.log('Document written with ID: ', folderId);
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+};
+
+export const deleteFolder = async (folderId: string) => {
+  try {
+    await deleteDoc(doc(firebaseDb, FIRESTORE_COLLECTIONS.FOLDERS, folderId));
+    console.log('Document written with ID: ', folderId);
+  } catch (e) {
+    console.error('Error adding document: ', e);
+  }
+};
+
+export const getFolders = async (userId: string) => {
+  try {
+    const q = query(
+      collection(firebaseDb, FIRESTORE_COLLECTIONS.FOLDERS),
+      where('userId', '==', userId),
+    );
+    const querySnapshot = await getDocs(q);
+    const folders = querySnapshot.docs.map((doc) => Folder.parse(doc.data()));
+    return folders;
+  } catch (e) {
+    console.error('Error getting documents: ', e);
+  }
+};
+
+export const getFolder = async (folderId: string) => {
+  try {
+    const docRef = doc(firebaseDb, FIRESTORE_COLLECTIONS.FOLDERS, folderId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return Folder.parse(docSnap.data());
+    } else {
+      console.log('No such document!');
+    }
+  } catch (e) {
+    console.error('Error getting document: ', e);
   }
 };
