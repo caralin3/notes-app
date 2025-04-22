@@ -1,6 +1,7 @@
 export interface AllNotesPageProps {
-  description?: string;
   loading?: boolean;
   notes: string[];
+  onCreateNote: () => void;
+  onCreateFolder: () => void;
   title?: string;
 }

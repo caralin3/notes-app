@@ -5,12 +5,20 @@ import {
   onAuthStateChanged,
   type User,
 } from '@notes-app/database';
-import type { Authentication } from '@toolpad/core';
+import {
+  AddIcon,
+  CreateFolderDialog,
+  CreateNoteDialog,
+  FolderIcon,
+  LibraryBooksIcon,
+  PopoverMenu,
+  ShortcutLabel,
+} from '@notes-app/ui-library';
+import type { Authentication, Navigation } from '@toolpad/core';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
 import { Outlet } from 'react-router';
 
 import { type Session, SessionContext } from './contexts/SessionContext';
-import { NAVIGATION } from './router';
 
 const BRANDING = {
   title: 'My Toolpad Core App',
@@ -24,6 +32,8 @@ const AUTHENTICATION: Authentication = {
 function App() {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showNewNoteDialog, setShowNewNoteDialog] = useState(false);
+  const [showNewFolderDialog, setShowNewFolderDialog] = useState(false);
 
   const sessionContextValue = useMemo(
     () => ({
@@ -53,15 +63,80 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  const navigation: Navigation = [
+    {
+      title: 'All Notes',
+      icon: <LibraryBooksIcon />,
+      action: (
+        <PopoverMenu
+          icon={<AddIcon />}
+          items={[
+            {
+              label: <ShortcutLabel label="New Note" shortcut="Ctrl + N" />,
+              onClick: () => setShowNewNoteDialog(true),
+            },
+            {
+              label: (
+                <ShortcutLabel label="New Folder" shortcut="Ctrl + Shift + N" />
+              ),
+              onClick: () => setShowNewFolderDialog(true),
+            },
+          ]}
+        />
+      ),
+    },
+    {
+      kind: 'header',
+      title: 'Notes',
+    },
+    {
+      segment: 'folder',
+      title: 'Folder',
+      icon: <FolderIcon />,
+      action: (
+        <PopoverMenu
+          items={[
+            {
+              label: <ShortcutLabel label="New Note" shortcut="Ctrl + N" />,
+              onClick: () => setShowNewNoteDialog(true),
+            },
+            {
+              label: (
+                <ShortcutLabel label="New Folder" shortcut="Ctrl + Shift + N" />
+              ),
+              onClick: () => setShowNewFolderDialog(true),
+            },
+          ]}
+        />
+      ),
+      pattern: '/:folder/:id',
+      children: [],
+    },
+  ];
+
   return (
     <ReactRouterAppProvider
-      navigation={NAVIGATION}
+      navigation={navigation}
       branding={BRANDING}
       session={session}
       authentication={AUTHENTICATION}
     >
       <SessionContext.Provider value={sessionContextValue}>
         <Outlet />
+        <CreateNoteDialog
+          open={showNewNoteDialog}
+          onClose={() => setShowNewNoteDialog(false)}
+          onSubmit={() => {
+            // Handle new note creation
+          }}
+        />
+        <CreateFolderDialog
+          open={showNewFolderDialog}
+          onClose={() => setShowNewFolderDialog(false)}
+          onSubmit={() => {
+            // Handle new folder creation
+          }}
+        />
       </SessionContext.Provider>
     </ReactRouterAppProvider>
   );
