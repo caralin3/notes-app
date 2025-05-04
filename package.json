@@ -10,6 +10,14 @@
     "packages/*"
   ],
   "scripts": {
+    "database:watch": "yarn workspace @notes-app/database run watch",
+    "database:build": "yarn workspace @notes-app/database run build",
+    "database:lint": "yarn workspace @notes-app/database run lint",
+    "database:pretty": "yarn workspace @notes-app/database run pretty",
+    "state-manager:watch": "yarn workspace @notes-app/state-manager run watch",
+    "state-manager:build": "yarn workspace @notes-app/state-manager run build",
+    "state-manager:lint": "yarn workspace @notes-app/state-manager run lint",
+    "state-manager:pretty": "yarn workspace @notes-app/state-manager run pretty",
     "ui-library:watch": "yarn workspace @notes-app/ui-library run watch",
     "ui-library:build": "yarn workspace @notes-app/ui-library run build",
     "ui-library:lint": "yarn workspace @notes-app/ui-library run lint",
@@ -29,7 +37,7 @@
     "electron:preview": "yarn workspace @notes-app/electron preview",
     "electron:lint": "yarn workspace @notes-app/electron run lint",
     "electron:pretty": "yarn workspace @notes-app/electron run pretty",
-    "dev": "concurrently --names \"ui-library,electron,web\" --prefix-colors \"blue,green,yellow\" \"yarn run ui-library:watch\" \"yarn run electron:dev\" \"yarn run web:dev\"",
+    "dev": "concurrently --names \"database,state-manager,ui-library,electron\" --prefix-colors \"red,magenta,blue,green\" \"yarn run database:watch\" \"yarn run state-manager:watch\" \"yarn run ui-library:watch\" \"yarn run electron:dev\"",
     "build": "concurrently --names \"ui-library,electron,web\" --prefix-colors \"blue,green,yellow\" \"yarn run ui-library:build\" \"yarn run electron:preview\" \"yarn run web:build\"",
     "lint": "concurrently --names \"ui-library,electron,web\" --prefix-colors \"blue,green,yellow\" \"yarn run ui-library:lint\" \"yarn run electron:lint\" \"yarn run web:lint\""
   },
