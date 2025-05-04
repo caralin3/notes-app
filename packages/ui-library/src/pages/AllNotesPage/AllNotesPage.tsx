@@ -6,11 +6,11 @@ import { AllNotesPageProps } from './AllNotesPage.types';
 import { Button } from '../../components';
 import { NotePageContainer } from '../../components/Containers';
 
-export function AllNotesPage({
+export function AllNotesPage<T>({
   notes,
   onCreateFolder,
   onCreateNote,
-}: AllNotesPageProps) {
+}: AllNotesPageProps<T>) {
   if (!notes || notes.length === 0) {
     return (
       <NotePageContainer>

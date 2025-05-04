@@ -1,5 +1,7 @@
 export interface DialogProps {
+  cancelButtonDisabled?: boolean;
   cancelButtonText?: string;
+  confirmButtonDisabled?: boolean;
   confirmButtonText: string;
   children?: React.ReactNode;
   dialogText?: string;

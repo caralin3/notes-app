@@ -22,9 +22,10 @@ export function SignUp() {
       // Convert Firebase user to Session format
       const userSession: Session = {
         user: {
-          // name: user.displayName || '',
           email: user.email || '',
+          // name: user.displayName || '',
           // image: user.photoURL || '',
+          uid: user.uid,
         },
       };
       setSession(userSession);

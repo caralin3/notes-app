@@ -6,9 +6,23 @@ import {
   CreateNoteDialog,
 } from '@notes-app/ui-library';
 
+import { useSession } from '../contexts/SessionContext';
+import { useFolders, useNotes } from '../hooks';
+
 export function AllNotes() {
   const [showNewNoteDialog, setShowNewNoteDialog] = useState(false);
   const [showNewFolderDialog, setShowNewFolderDialog] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(
+    undefined
+  );
+  const [submitting, setSubmitting] = useState(false);
+  const { addNote } = useNotes();
+  const { addFolder, folderOptions } = useFolders();
+  const { session } = useSession();
+
+  if (!session) {
+    return null;
+  }
 
   return (
     <>
@@ -19,17 +33,68 @@ export function AllNotes() {
         // title="All Notes"
       />
       <CreateNoteDialog
+        errorMessage={errorMessage}
+        folders={folderOptions}
+        loading={submitting}
         open={showNewNoteDialog}
-        onClose={() => setShowNewNoteDialog(false)}
-        onSubmit={() => {
-          // Handle new note creation
+        onClose={() => {
+          setShowNewNoteDialog(false);
+          setErrorMessage(undefined);
+          setSubmitting(false);
+        }}
+        onSubmit={(values) => {
+          setSubmitting(true);
+          setErrorMessage(undefined);
+          addNote(
+            {
+              ...values,
+              content: '',
+              createdAt: new Date().toISOString(),
+              userId: session.user.uid,
+            },
+            {
+              onSuccess: () => {
+                setSubmitting(false);
+                setShowNewNoteDialog(false);
+                setErrorMessage(undefined);
+              },
+              onError: (error) => {
+                setSubmitting(false);
+                setErrorMessage(error as string);
+              },
+            }
+          );
         }}
       />
       <CreateFolderDialog
         open={showNewFolderDialog}
-        onClose={() => setShowNewFolderDialog(false)}
-        onSubmit={() => {
-          // Handle new folder creation
+        loading={submitting}
+        onClose={() => {
+          setShowNewFolderDialog(false);
+          setErrorMessage(undefined);
+          setSubmitting(false);
+        }}
+        onSubmit={(name) => {
+          setSubmitting(true);
+          setErrorMessage(undefined);
+          addFolder(
+            {
+              name,
+              createdAt: new Date().toISOString(),
+              userId: session.user.uid,
+            },
+            {
+              onSuccess: () => {
+                setSubmitting(false);
+                setShowNewFolderDialog(false);
+                setErrorMessage(undefined);
+              },
+              onError: (error) => {
+                setSubmitting(false);
+                setErrorMessage(error as string);
+              },
+            }
+          );
         }}
       />
     </>

@@ -1,5 +1,7 @@
 export interface CreateFolderDialogProps {
+  errorMessage?: string;
+  loading?: boolean;
   open: boolean;
   onClose: () => void;
-  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit?: (name: string) => void;
 }

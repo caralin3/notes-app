@@ -2,6 +2,7 @@
 import {
   browserSessionPersistence,
   createUserWithEmailAndPassword,
+  getIdToken,
   GithubAuthProvider,
   GoogleAuthProvider,
   setPersistence,
@@ -110,6 +111,20 @@ export async function signUpWithCredentials(email: string, password: string) {
     };
   }
 }
+
+export const firebaseTokenId = async () => {
+  try {
+    const user = firebaseAuth.currentUser;
+    if (user) {
+      const token = await getIdToken(user);
+      return { success: true, token };
+    } else {
+      return { success: false, error: 'No user is currently signed in.' };
+    }
+  } catch (error: any) {
+    return { success: false, error: error.message };
+  }
+};
 
 // Sign out functionality
 export const firebaseSignOut = async () => {

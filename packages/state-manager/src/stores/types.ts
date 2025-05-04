@@ -4,7 +4,7 @@ import { NotesSlice } from './notesSlice';
 export interface Note {
   content: string;
   createdAt: string;
-  folderId?: string;
+  folderId: string | null;
   id: string;
   slug: string;
   title: string;

@@ -23,6 +23,7 @@ export function SignIn() {
         // name: user.displayName || '',
         email: user.email || '',
         // image: user.photoURL || '',
+        uid: user.uid,
       },
     };
     setSession(userSession);

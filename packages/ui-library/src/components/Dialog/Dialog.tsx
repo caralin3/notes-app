@@ -10,7 +10,9 @@ import { DialogProps } from './Dialog.types';
 import { Button } from '../Button';
 
 export const Dialog = ({
+  cancelButtonDisabled,
   cancelButtonText,
+  confirmButtonDisabled,
   confirmButtonText,
   children,
   dialogText,
@@ -34,7 +36,6 @@ export const Dialog = ({
             ? (event: React.FormEvent<HTMLFormElement>) => {
                 event.preventDefault();
                 onSubmitForm(event);
-                onClose();
               }
             : undefined,
         },
@@ -47,10 +48,13 @@ export const Dialog = ({
         {children}
       </DialogContent>
       <DialogActions sx={{ pb: 2, pr: 3 }}>
-        <Button onClick={onClose}>{cancelButtonText ?? 'Cancel'}</Button>
+        <Button onClick={onClose} disabled={cancelButtonDisabled}>
+          {cancelButtonText ?? 'Cancel'}
+        </Button>
         <Button
           type={onSubmitForm ? 'submit' : 'button'}
           onClick={onConfirm ? onConfirm : undefined}
+          disabled={confirmButtonDisabled}
           variant="contained">
           {confirmButtonText}
         </Button>

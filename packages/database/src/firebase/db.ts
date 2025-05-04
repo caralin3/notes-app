@@ -40,10 +40,10 @@ export const createNote = async (note: CreateNoteParams) => {
       note,
     );
     console.log('Document written with ID: ', res.id);
-
-    return Note.parse(res);
-  } catch (e) {
-    console.error('Error adding document: ', e);
+    return res.id;
+  } catch (e: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    throw (e as any).message;
   }
 };
 
@@ -51,8 +51,10 @@ export const updateNote = async (noteId: string, note: UpdateNoteParams) => {
   try {
     await updateDoc(doc(firebaseDb, FIRESTORE_COLLECTIONS.NOTES, noteId), note);
     console.log('Document written with ID: ', noteId);
-  } catch (e) {
-    console.error('Error adding document: ', e);
+    return noteId;
+  } catch (e: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    throw (e as any).message;
   }
 };
 
@@ -60,8 +62,10 @@ export const deleteNote = async (noteId: string) => {
   try {
     await deleteDoc(doc(firebaseDb, FIRESTORE_COLLECTIONS.NOTES, noteId));
     console.log('Document written with ID: ', noteId);
-  } catch (e) {
-    console.error('Error adding document: ', e);
+    return noteId;
+  } catch (e: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    throw (e as any).message;
   }
 };
 
@@ -74,8 +78,9 @@ export const getNotes = async (userId: string) => {
     const querySnapshot = await getDocs(q);
     const notes = querySnapshot.docs.map((doc) => Note.parse(doc.data()));
     return notes;
-  } catch (e) {
-    console.error('Error getting documents: ', e);
+  } catch (e: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    throw (e as any).message;
   }
 };
 
@@ -88,8 +93,9 @@ export const getNote = async (noteId: string) => {
     } else {
       console.log('No such document!');
     }
-  } catch (e) {
-    console.error('Error getting document: ', e);
+  } catch (e: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    throw (e as any).message;
   }
 };
 
@@ -101,8 +107,9 @@ export const createFolder = async (folder: CreateFolderParams) => {
     );
     console.log('Document written with ID: ', res.id);
     return res.id;
-  } catch (e) {
-    console.error('Error adding document: ', e);
+  } catch (e: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    throw (e as any).message;
   }
 };
 export const updateFolder = async (
@@ -115,8 +122,10 @@ export const updateFolder = async (
       folder,
     );
     console.log('Document written with ID: ', folderId);
-  } catch (e) {
-    console.error('Error adding document: ', e);
+    return folderId;
+  } catch (e: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    throw (e as any).message;
   }
 };
 
@@ -124,8 +133,10 @@ export const deleteFolder = async (folderId: string) => {
   try {
     await deleteDoc(doc(firebaseDb, FIRESTORE_COLLECTIONS.FOLDERS, folderId));
     console.log('Document written with ID: ', folderId);
-  } catch (e) {
-    console.error('Error adding document: ', e);
+    return folderId;
+  } catch (e: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    throw (e as any).message;
   }
 };
 
@@ -138,8 +149,9 @@ export const getFolders = async (userId: string) => {
     const querySnapshot = await getDocs(q);
     const folders = querySnapshot.docs.map((doc) => Folder.parse(doc.data()));
     return folders;
-  } catch (e) {
-    console.error('Error getting documents: ', e);
+  } catch (e: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    throw (e as any).message;
   }
 };
 
@@ -152,7 +164,8 @@ export const getFolder = async (folderId: string) => {
     } else {
       console.log('No such document!');
     }
-  } catch (e) {
-    console.error('Error getting document: ', e);
+  } catch (e: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    throw (e as any).message;
   }
 };

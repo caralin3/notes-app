@@ -1,6 +1,6 @@
-export interface AllNotesPageProps {
+export interface AllNotesPageProps<T> {
   loading?: boolean;
-  notes: string[];
+  notes: T[];
   onCreateNote: () => void;
   onCreateFolder: () => void;
   title?: string;

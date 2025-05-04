@@ -1,4 +1,4 @@
-import type { Story, StoryDefault } from '@ladle/react';
+import { action, type Story, type StoryDefault } from '@ladle/react';
 import { Stack, Typography } from '@mui/material';
 
 import { AllNotesPage } from './AllNotesPage';
@@ -12,7 +12,11 @@ export const AllNotesPageStory: Story = () => (
     <Typography component="h1" variant="h4">
       All Notes
     </Typography>
-    <AllNotesPage notes={[]} />
+    <AllNotesPage
+      notes={[]}
+      onCreateNote={action('Create Note')}
+      onCreateFolder={action('Create Folder')}
+    />
   </Stack>
 );
 
