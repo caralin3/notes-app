@@ -5,6 +5,7 @@ import FormatItalicIcon from '@mui/icons-material/FormatItalic';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import GridOnIcon from '@mui/icons-material/GridOn';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import RedoIcon from '@mui/icons-material/Redo';
 import UndoIcon from '@mui/icons-material/Undo';
@@ -174,6 +175,27 @@ export const MenuBar = ({ editor }: { editor: Editor }) => {
         <ImageButton
           editor={editor}
           tooltip={getTooltipLabel('Image', 'Ctrl + Shift + I')}
+        />
+        <IconButton
+          icon={<GridOnIcon fontSize="small" />}
+          onClick={() =>
+            editor
+              .chain()
+              .focus()
+              .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+              .run()
+          }
+          disabled={
+            !editor
+              .can()
+              .chain()
+              .focus()
+              .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
+              .run()
+          }
+          selected={isActive('table')}
+          tooltip={getTooltipLabel('Insert Table')}
+          tooltipPlacement="top"
         />
       </ButtonGroup>
     </Paper>

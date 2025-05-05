@@ -3,6 +3,10 @@ import { useEffect } from 'react';
 
 import { Box } from '@mui/material';
 import Dropcursor from '@tiptap/extension-dropcursor';
+import Table from '@tiptap/extension-table';
+import TableCell from '@tiptap/extension-table-cell';
+import TableHeader from '@tiptap/extension-table-header';
+import TableRow from '@tiptap/extension-table-row';
 import TaskItem from '@tiptap/extension-task-item';
 import TaskList from '@tiptap/extension-task-list';
 import Underline from '@tiptap/extension-underline';
@@ -53,6 +57,12 @@ const extensions = [
   Dropcursor,
   TaskList,
   TaskItem.configure({ nested: true }),
+  Table.configure({
+    resizable: true,
+  }),
+  TableRow,
+  TableHeader,
+  TableCell,
   Underline,
 ];
 
@@ -75,8 +85,17 @@ export const Tiptap = ({ content }: TiptapProps) => {
   return (
     <Box position="relative">
       <MenuBar editor={editor} />
-      <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
-        {editor.isActive('link') && <BubbleMenuContent editor={editor} />}
+      <BubbleMenu
+        editor={editor}
+        tippyOptions={{ duration: 100 }}
+        shouldShow={({ editor }) => {
+          const isLinkActive = editor.isActive('link');
+          // const isTableActive = editor.isActive('table');
+          // const isTextSelected = selection.from !== selection.to;
+          // return isLinkActive || isTableActive;
+          return isLinkActive;
+        }}>
+        <BubbleMenuContent editor={editor} />
       </BubbleMenu>
       <Box pt={3}>
         <EditorContent editor={editor} />
