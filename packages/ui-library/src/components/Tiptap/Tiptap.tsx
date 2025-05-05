@@ -1,4 +1,6 @@
 import './Tiptap.css';
+import { useEffect } from 'react';
+
 import { Box } from '@mui/material';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import TaskItem from '@tiptap/extension-task-item';
@@ -29,6 +31,7 @@ const extensions = [
     blockquote: false,
     code: false,
     codeBlock: false,
+    dropcursor: false,
     heading: false,
     horizontalRule: false,
     bulletList: false,
@@ -59,6 +62,12 @@ export const Tiptap = ({ content }: TiptapProps) => {
     content,
   });
 
+  useEffect(() => {
+    if (editor) {
+      editor.commands.setContent(content ?? '');
+    }
+  }, [content, editor]);
+
   if (!editor) {
     return null;
   }
@@ -69,7 +78,9 @@ export const Tiptap = ({ content }: TiptapProps) => {
       <BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
         {editor.isActive('link') && <BubbleMenuContent editor={editor} />}
       </BubbleMenu>
-      <EditorContent editor={editor} />
+      <Box pt={3}>
+        <EditorContent editor={editor} />
+      </Box>
     </Box>
   );
 };

@@ -8,6 +8,7 @@ import {
 } from '@notes-app/database';
 import {
   AddIcon,
+  ArticleIcon,
   CreateFolderDialog,
   CreateNoteDialog,
   DescriptionIcon,
@@ -25,6 +26,7 @@ import { useFolders, useNotes } from './hooks';
 
 const BRANDING = {
   title: 'Notes App',
+  logo: <ArticleIcon color="primary" fontSize="large" />,
 };
 
 const AUTHENTICATION: Authentication = {
@@ -41,7 +43,7 @@ function App() {
     undefined
   );
   const [submitting, setSubmitting] = useState(false);
-  const { addNote, loadNotes, notes } = useNotes();
+  const { addNote, getNotesByFolderId, loadNotes, notes } = useNotes();
   const { addFolder, loadFolders, folderOptions, folders } = useFolders();
 
   const sessionContextValue = useMemo(
@@ -109,10 +111,10 @@ function App() {
       title: 'Notes',
     },
     ...folders.map((folder) => ({
-      segment: folder.id,
+      pattern: '/folder/:folderId/:slug',
+      segment: `folder/${folder.id}`,
       title: folder.name,
       icon: <FolderIcon />,
-      pattern: '/:folder/:id',
       action: (
         <PopoverMenu
           items={[
@@ -123,18 +125,24 @@ function App() {
           ]}
         />
       ),
-      children: [
-        // {
-        //   segment: 'note',
-        //   title: 'Note',
-        //   icon: <DescriptionIcon />,
-        //   pattern: '/:folder/:id/:noteId',
-        //   children: [],
-        // },
-      ],
+      children: getNotesByFolderId(folder.id).map((note) => ({
+        segment: note.slug,
+        title: note.title,
+        icon: <DescriptionIcon />,
+        action: (
+          <PopoverMenu
+            items={[
+              {
+                label: <ShortcutLabel label="New Note" shortcut="Ctrl + N" />,
+                onClick: () => setShowNewNoteDialog(true),
+              },
+            ]}
+          />
+        ),
+      })),
     })),
     ...notes.map((note) => ({
-      segment: note.slug,
+      segment: `note/${note.slug}`,
       title: note.title,
       icon: <DescriptionIcon />,
       action: (

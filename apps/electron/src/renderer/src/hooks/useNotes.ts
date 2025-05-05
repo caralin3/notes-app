@@ -79,9 +79,19 @@ export function useNotes() {
     }
   };
 
+  const getNoteBySlug = (slug: string) =>
+    notes.find((note) => note.slug === slug);
+
+  const getNotesByFolderId = (folderId: string) =>
+    notes.filter((note) => note.folderId === folderId);
+
+  const genericNotes = notes.filter((note) => note.folderId === null);
+
   return {
-    notes,
+    notes: genericNotes,
     addNote,
+    getNoteBySlug,
+    getNotesByFolderId,
     loadNotes,
     updateNote,
     deleteNote,

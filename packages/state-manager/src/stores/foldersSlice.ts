@@ -33,17 +33,4 @@ export const createFoldersSlice: StateCreator<
         f.id === folderId ? { ...f, ...folder } : f,
       ),
     })),
-  // getFolder: (folderId: string) =>
-  //   set((state) => ({
-  //     folders: state.folders.find((folder) => folder.id === folderId),
-  //   })),
-  // getFolders: () => set((state) => ({ folders: state.folders })),
-  // getFoldersByFolderId: (folderId: string) =>
-  //   set((state) => ({
-  //     folders: state.folders.filter((folder) => folder.folderId === folderId),
-  //   })),
-  // getFoldersByUserId: (userId: string) =>
-  //   set((state) => ({
-  //     folders: state.folders.filter((folder) => folder.userId === userId),
-  //   })),
 });

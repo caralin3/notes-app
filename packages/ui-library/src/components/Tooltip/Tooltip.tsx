@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import MuiTooltip, { tooltipClasses } from '@mui/material/Tooltip';
 
 import { TooltipProps } from './Tooltip.types';
@@ -28,6 +29,9 @@ export const Tooltip = ({ children, ...props }: TooltipProps) => (
         },
       },
     }}>
-    {children}
+    <Box
+      sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
+      {children}
+    </Box>
   </MuiTooltip>
 );

@@ -34,7 +34,7 @@ export function DefaultLayout() {
   }
 
   return (
-    <DashboardLayout>
+    <DashboardLayout disableCollapsibleSidebar>
       <PageContainer>
         <Outlet />
       </PageContainer>

@@ -52,7 +52,7 @@ export function NoteLayout() {
   }
 
   return (
-    <DashboardLayout>
+    <DashboardLayout disableCollapsibleSidebar>
       <PageContainer slots={{ header: CustomPageHeader }}>
         <Outlet />
       </PageContainer>

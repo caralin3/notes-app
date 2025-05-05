@@ -31,17 +31,4 @@ export const createNotesSlice: StateCreator<
     set((state) => ({
       notes: state.notes.map((n) => (n.id === noteId ? { ...n, ...note } : n)),
     })),
-  // getNote: (noteId: string) =>
-  //   set((state) => ({
-  //     notes: state.notes.find((note) => note.id === noteId),
-  //   })),
-  // getNotes: () => set((state) => ({ notes: state.notes })),
-  // getNotesByFolderId: (folderId: string) =>
-  //   set((state) => ({
-  //     notes: state.notes.filter((note) => note.folderId === folderId),
-  //   })),
-  // getNotesByUserId: (userId: string) =>
-  //   set((state) => ({
-  //     notes: state.notes.filter((note) => note.userId === userId),
-  //   })),
 });
