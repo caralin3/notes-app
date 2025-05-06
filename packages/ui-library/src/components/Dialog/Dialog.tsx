@@ -21,6 +21,7 @@ export const Dialog = ({
   onConfirm,
   onSubmitForm,
   title,
+  type = 'default',
 }: DialogProps) => {
   return (
     <MuiDialog
@@ -55,6 +56,7 @@ export const Dialog = ({
           type={onSubmitForm ? 'submit' : 'button'}
           onClick={onConfirm ? onConfirm : undefined}
           disabled={confirmButtonDisabled}
+          color={type === 'danger' ? 'error' : 'primary'}
           variant="contained">
           {confirmButtonText}
         </Button>

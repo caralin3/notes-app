@@ -90,7 +90,7 @@ export const PopoverMenu = ({
               }}
               disabled={item.disabled}
               selected={item.selected}
-              sx={{ gap: 1 }}>
+              sx={{ gap: 2, alignItems: 'flex-start', display: 'flex' }}>
               {item.icon}
               {item.label}
             </MenuItem>

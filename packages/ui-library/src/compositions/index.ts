@@ -1,1 +1,5 @@
-export { CreateFolderDialog, CreateNoteDialog } from './FormDialogs';
+export {
+  CreateFolderDialog,
+  CreateNoteDialog,
+  DeleteDialog,
+} from './FormDialogs';

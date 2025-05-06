@@ -10,4 +10,5 @@ export interface DialogProps {
   onConfirm?: () => void;
   onSubmitForm?: (event: React.FormEvent<HTMLFormElement>) => void;
   title: string;
+  type?: 'default' | 'danger';
 }
