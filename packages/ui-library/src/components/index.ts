@@ -17,6 +17,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import StarIcon from '@mui/icons-material/Star';
 import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -31,12 +32,14 @@ export { Dialog } from './Dialog';
 export { IconButton } from './IconButton';
 export { PopoverMenu } from './PopoverMenu';
 export { ShortcutLabel } from './ShortcutLabel';
+export { Snackbar, type SnackbarProps } from './Snackbar';
 export { TextField } from './TextField';
 export { Tiptap } from './Tiptap';
 export { NotesToolbar } from './Toolbar';
 
 export {
   AddIcon,
+  Alert,
   ArticleIcon,
   Box,
   Container,
