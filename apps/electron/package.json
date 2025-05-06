@@ -30,6 +30,7 @@
     "@notes-app/state-manager": "1.0.0",
     "@notes-app/ui-library": "1.0.0",
     "@toolpad/core": "^0.13.0",
+    "date-fns": "^4.1.0",
     "electron-updater": "^6.3.9",
     "react-router": "^7.5.0"
   },
