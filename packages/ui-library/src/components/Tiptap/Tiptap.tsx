@@ -66,10 +66,13 @@ const extensions = [
   Underline,
 ];
 
-export const Tiptap = ({ content, header }: TiptapProps) => {
+export const Tiptap = ({ content, header, onChange }: TiptapProps) => {
   const editor = useEditor({
     extensions,
     content,
+    onUpdate({ editor }) {
+      onChange(editor.getHTML());
+    },
   });
 
   useEffect(() => {

@@ -18,9 +18,15 @@ interface NoteActionsProps {
   id: string;
   label: string;
   path: string;
+  showEdit?: boolean;
 }
 
-export const NoteActions = ({ id, label, path }: NoteActionsProps) => {
+export const NoteActions = ({
+  id,
+  label,
+  path,
+  showEdit = true,
+}: NoteActionsProps) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
@@ -33,46 +39,49 @@ export const NoteActions = ({ id, label, path }: NoteActionsProps) => {
 
   const { deleteNote } = useNotes();
 
+  const items = [
+    {
+      label: <ShortcutLabel label="Copy" />,
+      icon: <ContentCopyIcon fontSize="small" />,
+      disabled: true,
+      onClick: () => {},
+    },
+    {
+      label: <ShortcutLabel label="Move" />,
+      icon: <DriveFileMoveIcon fontSize="small" />,
+      disabled: true,
+      onClick: () => {},
+    },
+    {
+      label: 'divider',
+    },
+    {
+      label: <ShortcutLabel label="Archive" />,
+      icon: <InventoryIcon fontSize="small" />,
+      disabled: true,
+      onClick: () => {},
+    },
+    {
+      label: <ShortcutLabel label="Delete" />,
+      icon: <DeleteIcon fontSize="small" />,
+      onClick: () => setOpenDeleteDialog(true),
+    },
+  ];
+
+  if (showEdit) {
+    items.unshift({
+      label: 'divider',
+    });
+    items.unshift({
+      label: <ShortcutLabel label="Edit" />,
+      icon: <EditIcon fontSize="small" />,
+      onClick: () => navigate(path),
+    });
+  }
+
   return (
     <>
-      <PopoverMenu
-        items={[
-          {
-            label: <ShortcutLabel label="Edit" />,
-            icon: <EditIcon fontSize="small" />,
-            onClick: () => navigate(path),
-          },
-          {
-            label: 'divider',
-          },
-          {
-            label: <ShortcutLabel label="Copy" />,
-            icon: <ContentCopyIcon fontSize="small" />,
-            disabled: true,
-            onClick: () => {},
-          },
-          {
-            label: <ShortcutLabel label="Move" />,
-            icon: <DriveFileMoveIcon fontSize="small" />,
-            disabled: true,
-            onClick: () => {},
-          },
-          {
-            label: 'divider',
-          },
-          {
-            label: <ShortcutLabel label="Archive" />,
-            icon: <InventoryIcon fontSize="small" />,
-            disabled: true,
-            onClick: () => {},
-          },
-          {
-            label: <ShortcutLabel label="Delete" />,
-            icon: <DeleteIcon fontSize="small" />,
-            onClick: () => setOpenDeleteDialog(true),
-          },
-        ]}
-      />
+      <PopoverMenu items={items} />
       <DeleteDialog
         title="Delete Note"
         description={`Are you sure you want to delete the <strong>${label}</strong> note? This action cannot be undone.`}

@@ -66,6 +66,7 @@ export function useNotes() {
       onError?.(error);
     }
   };
+
   const deleteNote = async (
     noteId: string,
     { onSuccess, onError }: UseNotesCallbacks

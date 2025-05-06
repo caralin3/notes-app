@@ -31,7 +31,7 @@ export type CreateNoteParams = z.infer<typeof CreateNoteParams>;
 
 export const UpdateNoteParams = z.object({
   content: z.string().optional(),
-  id: z.string(),
+  id: z.string().optional(),
   slug: z.string().optional(),
   title: z.string().optional(),
   updatedAt: z.string(),

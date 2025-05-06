@@ -2,29 +2,34 @@ import { useMemo, useState } from 'react';
 
 import {
   Breadcrumbs,
-  DeleteDialog,
   NotePage,
   NotesToolbar,
+  Snackbar,
+  type SnackbarProps,
   Stack,
   Typography,
 } from '@notes-app/ui-library';
 import { useActivePage } from '@toolpad/core/useActivePage';
-import { Link, useLocation, useNavigate } from 'react-router';
+import { Link, useLocation } from 'react-router';
 
+import { NoteActions } from '../components/NoteActions';
 import { useNotes } from '../hooks';
+import { formatEditedAt } from '../utils/dateTime';
 
 export function Note() {
   const activePage = useActivePage();
   const location = useLocation();
-  const navigate = useNavigate();
   const slug = location.pathname.split('/').pop();
-  const { deleteNote, getNoteBySlug } = useNotes();
-
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(
-    undefined
-  );
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const { getNoteBySlug, updateNote } = useNotes();
+  const [notification, setNotification] = useState<
+    Omit<SnackbarProps, 'id' | 'onClose'>
+  >({
+    canAutoHide: true,
+    open: false,
+    message: '',
+    severity: 'success',
+  });
+  const [updatedContent, setUpdatedContent] = useState('');
 
   const note = useMemo(() => {
     if (!slug) {
@@ -40,7 +45,7 @@ export function Note() {
   if (!note) {
     return null;
   }
-  const { content, id, title } = note;
+  const { content, createdAt, id, title, updatedAt } = note;
 
   const breadcrumbs =
     activePage?.breadcrumbs.map((crumb) => ({
@@ -49,10 +54,49 @@ export function Note() {
       active: crumb.path === activePage.path,
     })) ?? [];
 
+  const handleCloseSnackbar = () => {
+    setNotification((prev) => ({ ...prev, open: false }));
+  };
+
+  const handleSave = async () => {
+    if (!id) {
+      return;
+    }
+
+    await updateNote(
+      id,
+      {
+        content: updatedContent,
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        onSuccess: () => {
+          setNotification({
+            canAutoHide: true,
+            open: true,
+            message: 'Note saved successfully',
+            severity: 'success',
+          });
+        },
+        onError: (error) => {
+          setNotification({
+            canAutoHide: false,
+            open: true,
+            message: error as string,
+            severity: 'error',
+          });
+        },
+      }
+    );
+  };
+
   return (
     <>
       <NotePage
         content={content}
+        onChange={(newContent) => {
+          setUpdatedContent(newContent);
+        }}
         header={
           <Stack px={3} py={1} gap={1}>
             <Breadcrumbs links={breadcrumbs} Link={Link} />
@@ -66,42 +110,25 @@ export function Note() {
                 {title}
               </Typography>
               <NotesToolbar
-                onEdit={() => {}}
-                onMove={() => {}}
-                onDelete={() => setOpenDeleteDialog(true)}
+                updatedAt={formatEditedAt(updatedAt || createdAt)}
+                onSave={handleSave}
+                menu={
+                  <NoteActions
+                    id={id}
+                    label={title}
+                    path={location.pathname}
+                    showEdit={false}
+                  />
+                }
               />
             </Stack>
           </Stack>
         }
       />
-      <DeleteDialog
-        title="Delete Note"
-        description={`Are you sure you want to delete the <strong>${title}</strong> note? This action cannot be undone.`}
-        open={openDeleteDialog}
-        onClose={() => setOpenDeleteDialog(false)}
-        loading={loading}
-        errorMessage={errorMessage}
-        onSubmit={() => {
-          setLoading(true);
-          setErrorMessage(undefined);
-          deleteNote(id, {
-            onSuccess: () => {
-              setLoading(false);
-              setErrorMessage(undefined);
-              setOpenDeleteDialog(false);
-              if (activePage?.path && activePage?.path.includes('folder')) {
-                navigate(
-                  activePage.path.slice(0, activePage.path.lastIndexOf('/'))
-                );
-              }
-              navigate('/');
-            },
-            onError: (error) => {
-              setErrorMessage(error as string);
-              setLoading(false);
-            },
-          });
-        }}
+      <Snackbar
+        id="note-save-notification"
+        {...notification}
+        onClose={handleCloseSnackbar}
       />
     </>
   );
