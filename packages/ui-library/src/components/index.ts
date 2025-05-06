@@ -25,6 +25,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 export { AutocompleteField } from './AutocompleteField';
+export { Breadcrumbs } from './Breadcrumbs';
 export { Button } from './Button';
 export { Dialog } from './Dialog';
 export { IconButton } from './IconButton';
