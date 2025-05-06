@@ -73,5 +73,5 @@ export const Editor: Story = () => {
   </blockquote>
 `;
 
-  return <Tiptap content={content} />;
+  return <Tiptap content={content} header={<div>Title</div>} />;
 };

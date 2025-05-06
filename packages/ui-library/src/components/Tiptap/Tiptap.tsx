@@ -1,7 +1,7 @@
 import './Tiptap.css';
 import { useEffect } from 'react';
 
-import { Box } from '@mui/material';
+import { Box, Container, Stack } from '@mui/material';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Table from '@tiptap/extension-table';
 import TableCell from '@tiptap/extension-table-cell';
@@ -66,7 +66,7 @@ const extensions = [
   Underline,
 ];
 
-export const Tiptap = ({ content }: TiptapProps) => {
+export const Tiptap = ({ content, header }: TiptapProps) => {
   const editor = useEditor({
     extensions,
     content,
@@ -83,8 +83,20 @@ export const Tiptap = ({ content }: TiptapProps) => {
   }
 
   return (
-    <Box position="relative">
-      <MenuBar editor={editor} />
+    <Stack position="relative">
+      <Stack
+        sx={{
+          backgroundColor: 'background.paper',
+          flex: 1,
+          padding: 0.5,
+          position: 'sticky',
+          top: 0,
+          width: '100%',
+          zIndex: 100,
+        }}>
+        {header}
+        <MenuBar editor={editor} />
+      </Stack>
       <BubbleMenu
         editor={editor}
         tippyOptions={{ duration: 100 }}
@@ -97,9 +109,11 @@ export const Tiptap = ({ content }: TiptapProps) => {
         }}>
         <BubbleMenuContent editor={editor} />
       </BubbleMenu>
-      <Box pt={3}>
-        <EditorContent editor={editor} />
-      </Box>
-    </Box>
+      <Container>
+        <Box pt={4}>
+          <EditorContent editor={editor} />
+        </Box>
+      </Container>
+    </Stack>
   );
 };

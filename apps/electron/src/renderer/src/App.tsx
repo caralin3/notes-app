@@ -21,6 +21,7 @@ import type { Authentication, Navigation } from '@toolpad/core';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
 import { Outlet } from 'react-router';
 
+import { NoteActions } from './components/NoteActions';
 import { type Session, SessionContext } from './contexts/SessionContext';
 import { useFolders, useNotes } from './hooks';
 
@@ -130,13 +131,10 @@ function App() {
         title: note.title,
         icon: <DescriptionIcon />,
         action: (
-          <PopoverMenu
-            items={[
-              {
-                label: <ShortcutLabel label="New Note" shortcut="Ctrl + N" />,
-                onClick: () => setShowNewNoteDialog(true),
-              },
-            ]}
+          <NoteActions
+            path={`/folder/${folder.id}/${note.slug}`}
+            label={note.title}
+            id={note.id}
           />
         ),
       })),
@@ -146,19 +144,10 @@ function App() {
       title: note.title,
       icon: <DescriptionIcon />,
       action: (
-        <PopoverMenu
-          items={[
-            {
-              label: <ShortcutLabel label="New Note" shortcut="Ctrl + N" />,
-              onClick: () => setShowNewNoteDialog(true),
-            },
-            {
-              label: (
-                <ShortcutLabel label="New Folder" shortcut="Ctrl + Shift + N" />
-              ),
-              onClick: () => setShowNewFolderDialog(true),
-            },
-          ]}
+        <NoteActions
+          path={`/note/${note.slug}`}
+          label={note.title}
+          id={note.id}
         />
       ),
     })),
