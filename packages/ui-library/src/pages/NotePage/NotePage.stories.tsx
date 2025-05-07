@@ -1,4 +1,4 @@
-import type { Story, StoryDefault } from '@ladle/react';
+import { action, type Story, type StoryDefault } from '@ladle/react';
 import { Stack, Typography } from '@mui/material';
 
 import { NotePage } from './NotePage';
@@ -14,6 +14,7 @@ export const NotesPageStory: Story = () => (
     </Typography>
     <NotePage
       header={<div>Test</div>}
+      onChange={() => action('onChange')}
       content={`<h1>Header 1</h1>
 <h2>Header 2</h2>
 <h3>Header 3</h3>

@@ -89,6 +89,7 @@ export function useNotes() {
   const genericNotes = notes.filter((note) => note.folderId === null);
 
   return {
+    allNotes: notes,
     notes: genericNotes,
     addNote,
     getNoteBySlug,

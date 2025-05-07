@@ -5,12 +5,16 @@ import { Stack, Typography } from '@mui/material';
 import { AllNotesPageProps } from './AllNotesPage.types';
 import { Button } from '../../components';
 import { NotePageContainer } from '../../components/Containers';
+import { TableOfContents } from '../../compositions';
 
-export function AllNotesPage<T>({
+export function AllNotesPage({
   notes,
+  Link,
+  listType,
   onCreateFolder,
   onCreateNote,
-}: AllNotesPageProps<T>) {
+  viewType,
+}: AllNotesPageProps) {
   if (!notes || notes.length === 0) {
     return (
       <NotePageContainer>
@@ -40,7 +44,12 @@ export function AllNotesPage<T>({
 
   return (
     <NotePageContainer>
-      <div>Note</div>
+      <TableOfContents
+        content={notes}
+        Link={Link}
+        listType={listType}
+        viewType={viewType}
+      />
     </NotePageContainer>
   );
 }

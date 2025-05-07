@@ -5,9 +5,11 @@ import {
   CreateFolderDialog,
   CreateNoteDialog,
 } from '@notes-app/ui-library';
+import { Link } from 'react-router';
 
 import { useSession } from '../contexts/SessionContext';
 import { useFolders, useNotes } from '../hooks';
+import { mapNotesToNestedList } from '../utils';
 
 export function AllNotes() {
   const [showNewNoteDialog, setShowNewNoteDialog] = useState(false);
@@ -16,8 +18,8 @@ export function AllNotes() {
     undefined
   );
   const [submitting, setSubmitting] = useState(false);
-  const { addNote } = useNotes();
-  const { addFolder, folderOptions } = useFolders();
+  const { allNotes, addNote } = useNotes();
+  const { addFolder, folders, folderOptions } = useFolders();
   const { session } = useSession();
 
   if (!session) {
@@ -27,10 +29,10 @@ export function AllNotes() {
   return (
     <>
       <AllNotesPage
-        notes={[]}
+        notes={mapNotesToNestedList(folders, allNotes)}
+        Link={Link}
         onCreateNote={() => setShowNewNoteDialog(true)}
         onCreateFolder={() => setShowNewFolderDialog(true)}
-        // title="All Notes"
       />
       <CreateNoteDialog
         errorMessage={errorMessage}

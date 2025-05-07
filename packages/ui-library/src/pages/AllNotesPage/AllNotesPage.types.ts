@@ -1,7 +1,11 @@
-export interface AllNotesPageProps<T> {
+import { TableOfContentsProps } from '../../compositions';
+
+export interface AllNotesPageProps {
   loading?: boolean;
-  notes: T[];
+  notes: TableOfContentsProps['content'];
+  Link?: TableOfContentsProps['Link'];
+  listType?: TableOfContentsProps['listType'];
   onCreateNote: () => void;
   onCreateFolder: () => void;
-  title?: string;
+  viewType?: TableOfContentsProps['viewType'];
 }

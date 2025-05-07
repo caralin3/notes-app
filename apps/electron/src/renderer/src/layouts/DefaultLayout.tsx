@@ -35,7 +35,7 @@ export function DefaultLayout() {
 
   return (
     <DashboardLayout disableCollapsibleSidebar>
-      <PageContainer>
+      <PageContainer breadcrumbs={[]}>
         <Outlet />
       </PageContainer>
     </DashboardLayout>
