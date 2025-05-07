@@ -1,11 +1,9 @@
 import { TableOfContentsProps } from '../../compositions';
 
-export interface AllNotesPageProps {
+export interface AllNotesPageProps<T>
+  extends Omit<TableOfContentsProps<T>, 'content' | 'viewType'> {
   loading?: boolean;
-  notes: TableOfContentsProps['content'];
-  Link?: TableOfContentsProps['Link'];
-  listType?: TableOfContentsProps['listType'];
+  notes: TableOfContentsProps<T>['content'];
   onCreateNote: () => void;
   onCreateFolder: () => void;
-  viewType?: TableOfContentsProps['viewType'];
 }

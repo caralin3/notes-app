@@ -1,4 +1,6 @@
-export interface TableOfContentsProps {
+import { DataTableProps } from '../../components/DataTable';
+
+export interface TableOfContentsProps<T> {
   content: {
     id: string;
     title: string;
@@ -11,5 +13,6 @@ export interface TableOfContentsProps {
   }[];
   Link?: any;
   listType?: 'disc' | 'decimal';
+  tableData?: Omit<DataTableProps<T>, 'LinkComponent'>;
   viewType?: 'list' | 'grid';
 }

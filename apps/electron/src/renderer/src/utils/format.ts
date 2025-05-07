@@ -1,10 +1,6 @@
 import { Folder, Note } from '@notes-app/state-manager';
-import { TableOfContentsProps } from '@notes-app/ui-library';
 
-export const mapNotesToNestedList = (
-  folders: Folder[],
-  notes: Note[]
-): TableOfContentsProps['content'] => {
+export const mapNotesToNestedList = (folders: Folder[], notes: Note[]) => {
   const folderNotes = folders.map((folder) => ({
     id: folder.id,
     title: folder.name,

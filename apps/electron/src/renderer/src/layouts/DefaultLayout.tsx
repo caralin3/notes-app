@@ -1,6 +1,5 @@
 import { Box, Container, LinearProgress } from '@notes-app/ui-library';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
-import { PageContainer } from '@toolpad/core/PageContainer';
 import { Navigate, Outlet, useLocation } from 'react-router';
 
 import { useSession } from '../contexts/SessionContext';
@@ -35,9 +34,7 @@ export function DefaultLayout() {
 
   return (
     <DashboardLayout disableCollapsibleSidebar>
-      <PageContainer breadcrumbs={[]}>
-        <Outlet />
-      </PageContainer>
+      <Outlet />
     </DashboardLayout>
   );
 }

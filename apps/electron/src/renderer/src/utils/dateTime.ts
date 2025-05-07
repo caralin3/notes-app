@@ -11,3 +11,8 @@ export const formatEditedAt = (date: string): string => {
   }
   return format(editedDate, 'MMM d, yyyy');
 };
+
+export const formatDisplayDate = (date: string): string => {
+  const createdDate = new Date(date);
+  return format(createdDate, 'MMM d, yyyy');
+};
