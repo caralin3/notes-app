@@ -1,4 +1,4 @@
-import { Story, StoryDefault } from '@ladle/react';
+import { action, Story, StoryDefault } from '@ladle/react';
 
 import { Tiptap } from './Tiptap';
 
@@ -73,5 +73,14 @@ export const Editor: Story = () => {
   </blockquote>
 `;
 
-  return <Tiptap content={content} header={<div>Title</div>} />;
+  return (
+    <Tiptap
+      onSaveTitle={action('onSaveTitle')}
+      setTitle={action('setTitle')}
+      title="Title"
+      content={content}
+      header={<div>Header</div>}
+      onChange={action('onChange')}
+    />
+  );
 };

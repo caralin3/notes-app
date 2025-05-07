@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
   Breadcrumbs,
@@ -30,6 +30,7 @@ export function Note() {
     severity: 'success',
   });
   const [updatedContent, setUpdatedContent] = useState('');
+  const [editedTitle, setEditedTitle] = useState('');
 
   const note = useMemo(() => {
     if (!slug) {
@@ -39,13 +40,20 @@ export function Note() {
     if (!slugNote) {
       return null;
     }
+
     return slugNote;
   }, [slug, getNoteBySlug]);
+
+  useEffect(() => {
+    if (note) {
+      setEditedTitle(note.title);
+    }
+  }, [note]);
 
   if (!note) {
     return null;
   }
-  const { content, createdAt, id, title, updatedAt } = note;
+  const { content, createdAt, id, updatedAt } = note;
 
   const breadcrumbs =
     activePage?.breadcrumbs.map((crumb) => ({
@@ -90,13 +98,50 @@ export function Note() {
     );
   };
 
+  const handleSaveTitle = async (title: string) => {
+    if (!id) {
+      return;
+    }
+
+    if (title === note.title) {
+      return;
+    }
+
+    await updateNote(
+      id,
+      {
+        title,
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        onSuccess: () => {
+          setNotification({
+            canAutoHide: true,
+            open: true,
+            message: 'Note renamed successfully',
+            severity: 'success',
+          });
+        },
+        onError: (error) => {
+          setNotification({
+            canAutoHide: false,
+            open: true,
+            message: error as string,
+            severity: 'error',
+          });
+        },
+      }
+    );
+  };
+
   return (
     <>
       <NotePage
+        title={editedTitle}
         content={content}
-        onChange={(newContent) => {
-          setUpdatedContent(newContent);
-        }}
+        onSaveTitle={handleSaveTitle}
+        onChange={setUpdatedContent}
+        setTitle={setEditedTitle}
         header={
           <Stack px={3} py={1} gap={1}>
             <Breadcrumbs links={breadcrumbs} Link={Link} />
@@ -107,7 +152,7 @@ export function Note() {
               gap={2}
             >
               <Typography component="h1" variant="h6" fontWeight="bold">
-                {title}
+                {editedTitle}
               </Typography>
               <NotesToolbar
                 updatedAt={formatEditedAt(updatedAt || createdAt)}
@@ -115,7 +160,7 @@ export function Note() {
                 menu={
                   <NoteActions
                     id={id}
-                    label={title}
+                    label={editedTitle}
                     path={location.pathname}
                     showEdit={false}
                   />

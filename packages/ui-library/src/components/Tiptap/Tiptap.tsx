@@ -1,7 +1,7 @@
 import './Tiptap.css';
 import { useEffect } from 'react';
 
-import { Box, Container, Stack } from '@mui/material';
+import { Box, Container, Stack, TextField } from '@mui/material';
 import Dropcursor from '@tiptap/extension-dropcursor';
 import Table from '@tiptap/extension-table';
 import TableCell from '@tiptap/extension-table-cell';
@@ -66,7 +66,14 @@ const extensions = [
   Underline,
 ];
 
-export const Tiptap = ({ content, header, onChange }: TiptapProps) => {
+export const Tiptap = ({
+  content,
+  header,
+  onChange,
+  onSaveTitle,
+  setTitle,
+  title,
+}: TiptapProps) => {
   const editor = useEditor({
     extensions,
     content,
@@ -112,7 +119,47 @@ export const Tiptap = ({ content, header, onChange }: TiptapProps) => {
         }}>
         <BubbleMenuContent editor={editor} />
       </BubbleMenu>
-      <Container>
+      <Container sx={{ pt: 4 }}>
+        <TextField
+          fullWidth
+          value={title}
+          size="small"
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+          onBlur={() => {
+            onSaveTitle(title);
+          }}
+          slotProps={{
+            root: {
+              sx(theme) {
+                return {
+                  '& fieldset': {
+                    borderColor: theme.palette.background.paper, // Default border
+                  },
+                  // '& .MuiOutlinedInput-root:hover fieldset': {
+                  //   borderColor: theme.palette.divider, // Hover state
+                  // },
+                  '&.Mui-focused fieldset': {
+                    borderColor: theme.palette.primary.main, // Focused state
+                  },
+                };
+              },
+            },
+            input: {
+              sx(theme) {
+                return {
+                  color: theme.palette.text.primary,
+                  fontSize: theme.typography.h4.fontSize,
+                  fontWeight: theme.typography.h4.fontWeight,
+                  '& input': {
+                    px: 0.5,
+                  },
+                };
+              },
+            },
+          }}
+        />
         <Box pt={4}>
           <EditorContent editor={editor} />
         </Box>

@@ -13,6 +13,9 @@ export const NotesPageStory: Story = () => (
       Note
     </Typography>
     <NotePage
+      title="Note Title"
+      onSaveTitle={action('onSaveTitle')}
+      setTitle={action('setTitle')}
       header={<div>Test</div>}
       onChange={() => action('onChange')}
       content={`<h1>Header 1</h1>
