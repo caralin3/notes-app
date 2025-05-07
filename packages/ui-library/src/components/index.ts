@@ -30,6 +30,7 @@ export { Breadcrumbs } from './Breadcrumbs';
 export { Button } from './Button';
 export { Dialog } from './Dialog';
 export { IconButton } from './IconButton';
+export { List, type ListProps } from './List';
 export { PopoverMenu } from './PopoverMenu';
 export { ShortcutLabel } from './ShortcutLabel';
 export { Snackbar, type SnackbarProps } from './Snackbar';
