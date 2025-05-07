@@ -28,6 +28,12 @@ import Typography from '@mui/material/Typography';
 export { AutocompleteField } from './AutocompleteField';
 export { Breadcrumbs } from './Breadcrumbs';
 export { Button } from './Button';
+export {
+  DataTable,
+  type DataCell,
+  type DataTableProps,
+  type HeadCell,
+} from './DataTable';
 export { Dialog } from './Dialog';
 export { IconButton } from './IconButton';
 export { List, type ListProps } from './List';
