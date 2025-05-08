@@ -1,5 +1,22 @@
 import { FoldersSlice } from './foldersSlice';
 import { NotesSlice } from './notesSlice';
+import { SettingsSlice } from './settingsSlice';
+
+export const ViewModes = {
+  GRID: 'grid',
+  LIST: 'list',
+} as const;
+export type ViewMode = (typeof ViewModes)[keyof typeof ViewModes];
+
+export interface Settings {
+  allNotesViewMode: ViewMode;
+  folderViewMode: ViewMode;
+}
+
+export interface PartialSettings {
+  allNotesViewMode?: ViewMode;
+  folderViewMode?: ViewMode;
+}
 
 export interface Note {
   content: string;
@@ -32,4 +49,4 @@ export interface UpdateFolder {
   updatedAt: string;
 }
 
-export type BoundStore = NotesSlice & FoldersSlice;
+export type BoundStore = NotesSlice & FoldersSlice & SettingsSlice;

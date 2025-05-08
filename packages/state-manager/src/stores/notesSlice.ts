@@ -1,4 +1,5 @@
 import { StateCreator } from 'zustand';
+
 import { BoundStore, Note, UpdateNote } from './types';
 
 export interface NotesSlice {
@@ -16,6 +17,7 @@ export const createNotesSlice: StateCreator<
   [],
   NotesSlice
 > = (set) => ({
+  notes: [],
   deleteNote: (noteId: string) =>
     set((state) => ({
       notes: state.notes.filter((note) => note.id !== noteId),
@@ -24,7 +26,6 @@ export const createNotesSlice: StateCreator<
     set((state) => ({
       notes: [note, ...state.notes],
     })),
-  notes: [],
   resetNotes: () => set({ notes: [] }),
   setNotes: (notes: Note[]) => set({ notes }),
   updateNote: (noteId: string, note: UpdateNote) =>

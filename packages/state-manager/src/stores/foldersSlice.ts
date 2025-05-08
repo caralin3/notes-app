@@ -1,4 +1,5 @@
 import { StateCreator } from 'zustand';
+
 import { BoundStore, Folder, UpdateFolder } from './types';
 
 export interface FoldersSlice {
@@ -16,6 +17,7 @@ export const createFoldersSlice: StateCreator<
   [],
   FoldersSlice
 > = (set) => ({
+  folders: [],
   addFolder: (folder: Folder) =>
     set((state) => ({
       folders: [folder, ...state.folders],
@@ -24,7 +26,6 @@ export const createFoldersSlice: StateCreator<
     set((state) => ({
       folders: state.folders.filter((folder) => folder.id !== folderId),
     })),
-  folders: [],
   resetFolders: () => set({ folders: [] }),
   setFolders: (folders: Folder[]) => set({ folders }),
   updateFolder: (folderId: string, folder: UpdateFolder) =>
