@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import GridOnIcon from '@mui/icons-material/GridOn';
@@ -12,15 +10,15 @@ import { NotePageContainer } from '../../components/Containers';
 import { TableOfContents } from '../../compositions';
 
 export function AllNotesPage<T>({
-  notes,
+  isGridView = true,
   Link,
   listType,
+  notes,
   onCreateFolder,
   onCreateNote,
+  setIsGridView,
   ...props
 }: AllNotesPageProps<T>) {
-  const [isGridView, setIsGridView] = useState(false);
-
   if (!notes || notes.length === 0) {
     return (
       <NotePageContainer title="All Notes">

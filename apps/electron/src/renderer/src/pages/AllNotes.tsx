@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 
+import { useBoundStore, ViewModes } from '@notes-app/state-manager';
 import {
   AllNotesPage,
   CreateFolderDialog,
@@ -31,6 +32,8 @@ export function AllNotes() {
   const { allNotes, addNote } = useNotes();
   const { addFolder, folders, folderOptions } = useFolders();
   const { session } = useSession();
+  const viewMode = useBoundStore((state) => state.settings.allNotesViewMode);
+  const updateSettings = useBoundStore((state) => state.updateSettings);
 
   const rows = useMemo(
     () =>
@@ -64,6 +67,13 @@ export function AllNotes() {
         Link={Link}
         onCreateNote={() => setShowNewNoteDialog(true)}
         onCreateFolder={() => setShowNewFolderDialog(true)}
+        setIsGridView={() =>
+          updateSettings({
+            allNotesViewMode:
+              viewMode === ViewModes.GRID ? ViewModes.LIST : ViewModes.GRID,
+          })
+        }
+        isGridView={viewMode === ViewModes.GRID}
         tableData={{
           rows,
           title: 'Notes',

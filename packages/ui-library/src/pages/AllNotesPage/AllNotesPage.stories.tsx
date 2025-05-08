@@ -12,6 +12,7 @@ export const NewAllNotesPageStory: Story = () => (
     notes={[]}
     onCreateNote={action('Create Note')}
     onCreateFolder={action('Create Folder')}
+    setIsGridView={action('setIsGridView')}
   />
 );
 
@@ -27,9 +28,11 @@ interface Note {
 }
 
 interface AllNotesPageStoryProps {
+  isGridView: boolean;
   listType: 'disc' | 'decimal';
 }
 export const AllNotesPageStory: Story<AllNotesPageStoryProps> = ({
+  isGridView = false,
   listType = 'disc',
 }: AllNotesPageStoryProps) => {
   const headCells: HeadCell<Note>[] = [
@@ -93,6 +96,8 @@ export const AllNotesPageStory: Story<AllNotesPageStoryProps> = ({
       ]}
       onCreateNote={action('Create Note')}
       onCreateFolder={action('Create Folder')}
+      setIsGridView={action('setIsGridView')}
+      isGridView={isGridView}
       tableData={{
         headCells,
         rows,
@@ -110,6 +115,7 @@ export const AllNotesPageStory: Story<AllNotesPageStoryProps> = ({
 AllNotesPageStory.storyName = 'With Notes';
 
 AllNotesPageStory.args = {
+  isGridView: false,
   listType: 'disc',
 };
 
