@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import {
   ContentCopyIcon,
-  DeleteDialog,
   DeleteIcon,
   DriveFileMoveIcon,
   EditIcon,
@@ -13,6 +12,7 @@ import {
 import { useNavigate } from 'react-router';
 
 import { useFolders } from '../hooks';
+import { DeleteDialog } from './DeleteDialog';
 
 interface FolderActionsProps {
   id: string;
@@ -28,10 +28,6 @@ export const FolderActions = ({
   showEdit = true,
 }: FolderActionsProps) => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(
-    undefined
-  );
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   // const [openMoveDialog, setOpenMoveDialog] = useState(false);
   // const [openCopyDialog, setOpenCopyDialog] = useState(false);
@@ -83,28 +79,12 @@ export const FolderActions = ({
     <>
       <PopoverMenu items={items} />
       <DeleteDialog
-        title="Delete Folder"
-        description={`Are you sure you want to delete the <strong>${label}</strong> folder? This action cannot be undone.`}
+        deleteType="Folder"
+        deleteItem={label}
+        onDelete={(cbs) => deleteFolder(id, cbs)}
         open={openDeleteDialog}
-        onClose={() => setOpenDeleteDialog(false)}
-        loading={loading}
-        errorMessage={errorMessage}
-        onSubmit={() => {
-          setLoading(true);
-          setErrorMessage(undefined);
-          deleteFolder(id, {
-            onSuccess: () => {
-              setLoading(false);
-              setErrorMessage(undefined);
-              setOpenDeleteDialog(false);
-              navigate('/');
-            },
-            onError: (error) => {
-              setErrorMessage(error as string);
-              setLoading(false);
-            },
-          });
-        }}
+        setOpen={setOpenDeleteDialog}
+        redirect={() => navigate('/')}
       />
     </>
   );

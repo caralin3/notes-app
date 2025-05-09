@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import {
   ContentCopyIcon,
-  DeleteDialog,
   DeleteIcon,
   DriveFileMoveIcon,
   EditIcon,
@@ -13,6 +12,7 @@ import {
 import { useNavigate } from 'react-router';
 
 import { useNotes } from '../hooks';
+import { DeleteDialog } from './DeleteDialog';
 
 interface NoteActionsProps {
   id: string;
@@ -28,10 +28,6 @@ export const NoteActions = ({
   showEdit = true,
 }: NoteActionsProps) => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(
-    undefined
-  );
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   // const [openMoveDialog, setOpenMoveDialog] = useState(false);
   // const [openCopyDialog, setOpenCopyDialog] = useState(false);
@@ -83,30 +79,16 @@ export const NoteActions = ({
     <>
       <PopoverMenu items={items} />
       <DeleteDialog
-        title="Delete Note"
-        description={`Are you sure you want to delete the <strong>${label}</strong> note? This action cannot be undone.`}
+        deleteType="Note"
+        deleteItem={label}
+        onDelete={(cbs) => deleteNote(id, cbs)}
         open={openDeleteDialog}
-        onClose={() => setOpenDeleteDialog(false)}
-        loading={loading}
-        errorMessage={errorMessage}
-        onSubmit={() => {
-          setLoading(true);
-          setErrorMessage(undefined);
-          deleteNote(id, {
-            onSuccess: () => {
-              setLoading(false);
-              setErrorMessage(undefined);
-              setOpenDeleteDialog(false);
-              if (path.includes('folder')) {
-                navigate(path.slice(0, path.lastIndexOf('/')));
-              }
-              navigate('/');
-            },
-            onError: (error) => {
-              setErrorMessage(error as string);
-              setLoading(false);
-            },
-          });
+        setOpen={setOpenDeleteDialog}
+        redirect={() => {
+          if (path.includes('folder')) {
+            navigate(path.slice(0, path.lastIndexOf('/')));
+          }
+          navigate('/');
         }}
       />
     </>
