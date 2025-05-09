@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router';
 
 import App from './App';
-import { DefaultLayout, NoteLayout } from './layouts';
+import { DefaultLayout } from './layouts';
 import { AllNotes, Note, SignIn, SignUp } from './pages';
 
 export const router = createBrowserRouter([
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/folder/:folderId',
-        Component: NoteLayout,
+        Component: DefaultLayout,
         children: [
           {
             path: '/folder/:folderId',
@@ -34,7 +34,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/note',
-        Component: NoteLayout,
+        Component: DefaultLayout,
         children: [
           {
             path: '/note/:slug',
