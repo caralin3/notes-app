@@ -36,6 +36,7 @@ export {
 } from './DataTable';
 export { Dialog } from './Dialog';
 export { IconButton } from './IconButton';
+export { InlineEditField } from './InlineEditField.tsx';
 export { List, type ListProps } from './List';
 export { PopoverMenu } from './PopoverMenu';
 export { ShortcutLabel } from './ShortcutLabel';
