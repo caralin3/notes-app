@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router';
 
 import App from './App';
 import { DefaultLayout } from './layouts';
-import { AllNotes, Note, SignIn, SignUp } from './pages';
+import { AllNotes, Folder, Note, SignIn, SignUp } from './pages';
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: '/folder/:folderId',
-            Component: Note,
+            Component: Folder,
           },
           {
             path: '/folder/:folderId/:slug',

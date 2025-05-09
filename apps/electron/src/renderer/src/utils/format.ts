@@ -24,3 +24,13 @@ export const mapNotesToNestedList = (folders: Folder[], notes: Note[]) => {
 
   return [...folderNotes, ...notesWithoutFolder];
 };
+
+export const mapFolderNotesToList = (folderId: string, notes: Note[]) => {
+  return notes
+    .filter((note) => note.folderId === folderId)
+    .map((note) => ({
+      id: note.id,
+      title: note.title,
+      path: `/folder/${folderId}/${note.slug}`,
+    }));
+};

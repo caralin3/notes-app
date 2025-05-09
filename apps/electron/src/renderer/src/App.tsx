@@ -21,7 +21,7 @@ import type { Authentication, Navigation } from '@toolpad/core';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
 import { Outlet, useNavigate } from 'react-router';
 
-import { NoteActions } from './components/NoteActions';
+import { FolderActions, NoteActions } from './components';
 import { type Session, SessionContext } from './contexts/SessionContext';
 import { useFolders, useNotes } from './hooks';
 
@@ -118,13 +118,10 @@ function App() {
       title: folder.name,
       icon: <FolderIcon />,
       action: (
-        <PopoverMenu
-          items={[
-            {
-              label: <ShortcutLabel label="New Note" shortcut="Ctrl + N" />,
-              onClick: () => setShowNewNoteDialog(true),
-            },
-          ]}
+        <FolderActions
+          path={`/folder/${folder.id}`}
+          label={folder.name}
+          id={folder.id}
         />
       ),
       children: getNotesByFolderId(folder.id).map((note) => ({

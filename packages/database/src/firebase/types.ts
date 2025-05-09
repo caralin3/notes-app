@@ -55,7 +55,7 @@ export const CreateFolderParams = z.object({
 export type CreateFolderParams = z.infer<typeof CreateFolderParams>;
 
 export const UpdateFolderParams = z.object({
-  id: z.string(),
+  id: z.string().optional(),
   name: z.string().optional(),
   updatedAt: z.string(),
 });

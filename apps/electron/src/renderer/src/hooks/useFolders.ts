@@ -84,9 +84,12 @@ export function useFolders() {
     value: folder.id,
   }));
 
+  const getFolderById = (id: string) => folders.find((note) => note.id === id);
+
   return {
     folderOptions,
     folders,
+    getFolderById,
     addFolder,
     loadFolders,
     updateFolder,

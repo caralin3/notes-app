@@ -1,6 +1,6 @@
 import { Box, Container, Stack, Typography } from '@mui/material';
 
-import { NotePageContainerProps } from './NotePageContainer.types';
+import type { NotePageContainerProps } from './NotePageContainer.types';
 
 export const NotePageContainer = ({
   actions,
@@ -8,7 +8,7 @@ export const NotePageContainer = ({
   title,
 }: NotePageContainerProps) => (
   <Container sx={{ pt: 3 }}>
-    <Stack direction="row" justifyContent="space-between">
+    <Stack direction="row" justifyContent="space-between" gap={2}>
       <Typography component="h1" variant="h4">
         {title}
       </Typography>
