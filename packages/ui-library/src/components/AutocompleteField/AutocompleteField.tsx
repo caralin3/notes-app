@@ -14,7 +14,6 @@ export const AutocompleteField = <T,>({
   return (
     <Autocomplete
       {...props}
-      disablePortal
       sx={{ minWidth: 200 }}
       renderInput={(params) => (
         <TextField
