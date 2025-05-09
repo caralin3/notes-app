@@ -19,7 +19,7 @@ import {
 } from '@notes-app/ui-library';
 import type { Authentication, Navigation } from '@toolpad/core';
 import { ReactRouterAppProvider } from '@toolpad/core/react-router';
-import { Outlet } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 
 import { NoteActions } from './components/NoteActions';
 import { type Session, SessionContext } from './contexts/SessionContext';
@@ -36,6 +36,7 @@ const AUTHENTICATION: Authentication = {
 };
 
 function App() {
+  const navigate = useNavigate();
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [showNewNoteDialog, setShowNewNoteDialog] = useState(false);
@@ -189,6 +190,11 @@ function App() {
                       setSubmitting(false);
                       setShowNewNoteDialog(false);
                       setErrorMessage(undefined);
+                      if (values.folderId) {
+                        navigate(`/folder/${values.folderId}/${values.slug}`);
+                      } else {
+                        navigate(`/note/${values.slug}`);
+                      }
                     },
                     onError: (error) => {
                       setSubmitting(false);
@@ -217,10 +223,11 @@ function App() {
                     userId: session.user.uid,
                   },
                   {
-                    onSuccess: () => {
+                    onSuccess: (id) => {
                       setSubmitting(false);
                       setShowNewFolderDialog(false);
                       setErrorMessage(undefined);
+                      navigate(`/folder/${id}`);
                     },
                     onError: (error) => {
                       setSubmitting(false);

@@ -6,7 +6,7 @@ import {
   CreateFolderDialog,
   CreateNoteDialog,
 } from '@notes-app/ui-library';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 import { useSession } from '../contexts/SessionContext';
 import { useFolders, useNotes } from '../hooks';
@@ -23,6 +23,7 @@ interface NotesTableData {
 }
 
 export function AllNotes() {
+  const navigate = useNavigate();
   const [showNewNoteDialog, setShowNewNoteDialog] = useState(false);
   const [showNewFolderDialog, setShowNewFolderDialog] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | undefined>(
@@ -128,6 +129,11 @@ export function AllNotes() {
                 setSubmitting(false);
                 setShowNewNoteDialog(false);
                 setErrorMessage(undefined);
+                if (values.folderId) {
+                  navigate(`/folder/${values.folderId}/${values.slug}`);
+                } else {
+                  navigate(`/note/${values.slug}`);
+                }
               },
               onError: (error) => {
                 setSubmitting(false);
@@ -155,10 +161,11 @@ export function AllNotes() {
               userId: session.user.uid,
             },
             {
-              onSuccess: () => {
+              onSuccess: (id) => {
                 setSubmitting(false);
                 setShowNewFolderDialog(false);
                 setErrorMessage(undefined);
+                navigate(`/folder/${id}`);
               },
               onError: (error) => {
                 setSubmitting(false);

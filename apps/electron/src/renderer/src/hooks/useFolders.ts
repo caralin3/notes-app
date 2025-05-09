@@ -9,7 +9,7 @@ import {
 import { useBoundStore } from '@notes-app/state-manager';
 
 interface UseFoldersCallbacks {
-  onSuccess?: () => void;
+  onSuccess?: (id: string) => void;
   onError?: (err: unknown) => void;
 }
 
@@ -47,7 +47,7 @@ export function useFolders() {
         ...folder,
         id,
       });
-      onSuccess?.();
+      onSuccess?.(id);
     } catch (error: unknown) {
       onError?.(error);
     }
@@ -61,7 +61,7 @@ export function useFolders() {
     try {
       await updateDbFolder(folderId, folder);
       updateStoredFolder(folderId, folder);
-      onSuccess?.();
+      onSuccess?.(folderId);
     } catch (error: unknown) {
       onError?.(error);
     }
@@ -73,7 +73,7 @@ export function useFolders() {
     try {
       await deleteDbFolder(folderId);
       deleteStoredFolder(folderId);
-      onSuccess?.();
+      onSuccess?.(folderId);
     } catch (error: unknown) {
       onError?.(error);
     }
