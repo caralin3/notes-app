@@ -107,6 +107,7 @@ export function AllNotes() {
       <CreateNoteDialog
         errorMessage={errorMessage}
         folders={folderOptions}
+        slugs={allNotes.map((note) => note.slug)}
         loading={submitting}
         open={showNewNoteDialog}
         onClose={() => {

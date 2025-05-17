@@ -19,6 +19,7 @@ export const CreateNoteDialogStory: Story = () => {
         open={open}
         onClose={() => setOpen(false)}
         onSubmit={action('onSubmit')}
+        slugs={[]}
         folders={[
           {
             value: '1',

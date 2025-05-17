@@ -167,6 +167,7 @@ function App() {
             <CreateNoteDialog
               errorMessage={errorMessage}
               folders={folderOptions}
+              slugs={notes.map((note) => note.slug)}
               loading={submitting}
               open={showNewNoteDialog}
               onClose={() => {

@@ -12,4 +12,5 @@ export interface CreateNoteDialogProps {
     slug: string;
     title: string;
   }) => void;
+  slugs: Array<string>;
 }

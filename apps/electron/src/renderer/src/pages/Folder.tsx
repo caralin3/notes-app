@@ -210,6 +210,7 @@ export function Folder() {
       <CreateNoteDialog
         errorMessage={errorMessage}
         folders={folderOptions}
+        slugs={folderNotes.map((note) => note.slug)}
         loading={submitting}
         open={showNewNoteDialog}
         onClose={() => {

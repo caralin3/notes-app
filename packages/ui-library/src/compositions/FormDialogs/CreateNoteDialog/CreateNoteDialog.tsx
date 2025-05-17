@@ -14,6 +14,7 @@ export const CreateNoteDialog = ({
   onClose,
   onSubmit,
   open,
+  slugs,
 }: CreateNoteDialogProps) => {
   const [values, setValues] = useState<{
     folderId: string | null;
@@ -72,6 +73,21 @@ export const CreateNoteDialog = ({
       return;
     }
 
+    if (values.slug.trim() === '') {
+      setValidationError('Slug is required');
+      return;
+    }
+
+    if (values.slug.length < 3) {
+      setValidationError('Slug must be at least 3 characters long');
+      return;
+    }
+
+    if (slugs.includes(values.slug)) {
+      setValidationError('Slug already exists. Please enter a unique slug.');
+      return;
+    }
+
     if (onSubmit) {
       onSubmit({
         folderId: values.folderId,
@@ -114,8 +130,8 @@ export const CreateNoteDialog = ({
             const folder = value as { label: string; value: string } | null;
             setValues({ ...values, folderId: folder?.value ?? null });
           }}
-          error={!!errorMessage || !!validationError}
-          helperText={errorMessage || validationError}
+          error={!!errorMessage}
+          helperText={errorMessage}
         />
         <TextField
           fullWidth
@@ -129,12 +145,14 @@ export const CreateNoteDialog = ({
         />
         <TextField
           fullWidth
-          disabled
+          disabled={!values.title}
           required
           label="Slug"
           variant="outlined"
           value={values.slug}
           onChange={(e) => handleChange(e, 'slug')}
+          error={!!validationError}
+          helperText={validationError}
         />
       </Stack>
     </Dialog>
