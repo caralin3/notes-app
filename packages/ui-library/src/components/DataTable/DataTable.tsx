@@ -124,7 +124,6 @@ export const DataTable = <T,>({
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.id)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
@@ -135,6 +134,7 @@ export const DataTable = <T,>({
                       <Checkbox
                         color="primary"
                         checked={isItemSelected}
+                        onClick={(event) => handleClick(event, row.id)}
                         slotProps={{
                           input: {
                             'aria-labelledby': labelId,
