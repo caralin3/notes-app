@@ -88,7 +88,6 @@ export function Folder() {
         id: index,
         uid: note.id,
         name: note.title,
-        folderName: folder?.name,
         createdAt: formatDisplayDate(note.createdAt),
         updatedAt: note.updatedAt
           ? formatDisplayDate(note.updatedAt)
