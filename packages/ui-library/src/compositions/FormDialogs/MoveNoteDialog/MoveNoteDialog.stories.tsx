@@ -18,8 +18,10 @@ export const MoveNoteDialogStory: Story = () => {
       <MoveNoteDialog
         open={open}
         noteTitle="Note Title"
+        folderId={null}
         onClose={() => setOpen(false)}
         onSubmit={action('onSubmit')}
+        setErrorMessage={action('setErrorMessage')}
         folders={[
           {
             value: '1',

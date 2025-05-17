@@ -7,29 +7,40 @@ import { AutocompleteField, Dialog } from '../../../components';
 
 export const MoveNoteDialog = ({
   errorMessage,
+  folderId: initialFolderId,
   folders,
   loading,
   noteTitle,
   onClose,
   onSubmit,
   open,
+  setErrorMessage,
 }: MoveNoteDialogProps) => {
-  const [folderId, setFolderId] = useState<string | null>(null);
+  const [folderId, setFolderId] = useState<string | null>(initialFolderId);
   const [validationError, setValidationError] = useState<string | undefined>(
     '',
   );
 
   useEffect(() => {
     if (open) {
-      setFolderId(null);
+      setFolderId(initialFolderId);
       setValidationError(undefined);
     }
-  }, [open]);
+  }, [open, initialFolderId]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const handleSubmit = () => {
     setValidationError(undefined);
+    setErrorMessage(undefined);
+    if (!folderId) {
+      setValidationError('Please select a folder');
+      return;
+    }
+
+    if (folderId === 'none') {
+      onSubmit(null);
+      return;
+    }
+
     onSubmit(folderId);
   };
 
@@ -44,10 +55,10 @@ export const MoveNoteDialog = ({
       title="Move Note"
       open={open}
       onClose={handleClose}
-      onSubmitForm={handleSubmit}
+      onConfirm={handleSubmit}
       cancelButtonDisabled={loading}
       cancelButtonText="Cancel"
-      confirmButtonDisabled={loading}
+      confirmButtonDisabled={loading || !!errorMessage || !!validationError}
       confirmButtonText="Move">
       <Stack spacing={3}>
         <Typography>
@@ -59,12 +70,21 @@ export const MoveNoteDialog = ({
         }>
           label="Folder"
           placeholder="Select a folder"
-          options={folders}
+          value={folders.find((f) => f.value === folderId) ?? null}
+          options={[
+            {
+              label: 'None',
+              value: 'none',
+            },
+            ...folders,
+          ]}
           getOptionLabel={(option) =>
             typeof option === 'string' ? option : option.label
           }
           isOptionEqualToValue={(option, value) => option.value === value.value}
           onChange={(_, value) => {
+            setValidationError(undefined);
+            setErrorMessage(undefined);
             const folder = value as { label: string; value: string } | null;
             setFolderId(folder?.value ?? null);
           }}

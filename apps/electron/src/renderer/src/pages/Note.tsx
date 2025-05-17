@@ -163,6 +163,7 @@ export function Note() {
                     label={editedTitle}
                     path={location.pathname}
                     showEdit={false}
+                    slug={slug ?? ''}
                   />
                 }
               />

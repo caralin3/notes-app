@@ -59,9 +59,7 @@ export const CreateNoteDialog = ({
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const handleSubmit = () => {
     setValidationError(undefined);
     setTitleError(undefined);
 

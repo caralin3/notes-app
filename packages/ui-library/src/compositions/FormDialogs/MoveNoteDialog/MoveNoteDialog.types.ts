@@ -1,6 +1,7 @@
 export interface MoveNoteDialogProps {
   description?: string;
   errorMessage?: string;
+  folderId: string | null;
   folders: {
     label: string;
     value: string;
@@ -10,4 +11,5 @@ export interface MoveNoteDialogProps {
   open: boolean;
   onClose: () => void;
   onSubmit: (folderId: string | null) => void;
+  setErrorMessage: React.Dispatch<React.SetStateAction<string | undefined>>;
 }

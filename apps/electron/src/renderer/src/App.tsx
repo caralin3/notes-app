@@ -133,6 +133,7 @@ function App() {
             path={`/folder/${folder.id}/${note.slug}`}
             label={note.title}
             id={note.id}
+            slug={note.slug}
           />
         ),
       })),
@@ -146,6 +147,7 @@ function App() {
           path={`/note/${note.slug}`}
           label={note.title}
           id={note.id}
+          slug={note.slug}
         />
       ),
     })),

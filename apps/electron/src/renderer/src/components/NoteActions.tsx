@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import {
   ContentCopyIcon,
@@ -11,14 +11,16 @@ import {
 } from '@notes-app/ui-library';
 import { useNavigate } from 'react-router';
 
-import { useNotes } from '../hooks';
+import { useFolders, useNotes } from '../hooks';
 import { DeleteDialog } from './DeleteDialog';
+import { MoveDialog } from './MoveDialog';
 
 interface NoteActionsProps {
   id: string;
   label: string;
   path: string;
   showEdit?: boolean;
+  slug: string;
 }
 
 export const NoteActions = ({
@@ -26,14 +28,18 @@ export const NoteActions = ({
   label,
   path,
   showEdit = true,
+  slug,
 }: NoteActionsProps) => {
   const navigate = useNavigate();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  // const [openMoveDialog, setOpenMoveDialog] = useState(false);
+  const [openMoveDialog, setOpenMoveDialog] = useState(false);
   // const [openCopyDialog, setOpenCopyDialog] = useState(false);
   // const [openArchiveDialog, setOpenArchiveDialog] = useState(false);
 
-  const { deleteNote } = useNotes();
+  const { deleteNote, getNoteBySlug, updateNote } = useNotes();
+  const { folderOptions } = useFolders();
+
+  const note = useMemo(() => getNoteBySlug(slug), [slug, getNoteBySlug]);
 
   const items = [
     {
@@ -45,8 +51,7 @@ export const NoteActions = ({
     {
       label: <ShortcutLabel label="Move" />,
       icon: <DriveFileMoveIcon fontSize="small" />,
-      disabled: true,
-      onClick: () => {},
+      onClick: () => setOpenMoveDialog(true),
     },
     {
       label: 'divider',
@@ -78,6 +83,27 @@ export const NoteActions = ({
   return (
     <>
       <PopoverMenu items={items} />
+      <MoveDialog
+        item={label}
+        open={openMoveDialog}
+        setOpen={setOpenMoveDialog}
+        folders={folderOptions}
+        folderId={note?.folderId ?? null}
+        onMove={({ folderId, onSuccess, onError }) => {
+          updateNote(
+            id,
+            {
+              folderId,
+              updatedAt: new Date().toISOString(),
+            },
+            {
+              onSuccess,
+              onError,
+            }
+          );
+        }}
+        redirect={(folderId) => navigate(`/folder/${folderId}/${slug}`)}
+      />
       <DeleteDialog
         deleteType="Note"
         deleteItem={label}
